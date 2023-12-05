@@ -1,58 +1,26 @@
-<script setup>
-import { ref, h, defineComponent, defineAsyncComponent, computed } from "vue";
-// import UseRequestDemo from "./useRequest/useRequestDemo.vue";
-const UseRequestDemo = () => import("./useRequest/useRequestDemo.vue");
+<script setup lang="ts">
+import * as useRequest from "../../../lib/useRequest/index";
+console.log("useRequest1", useRequest);
 
-console.log("UseRequestDemo: ", UseRequestDemo);
+const mockFetch: any = async () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(Math.random());
+    }, 1000);
+  });
+};
+// console.log("useRequest", useRequest);
 
-const componentPath = ref(null);
-const props = defineProps({
-  data: { type: String, default: "111" },
-});
+const { runAsync, loading, data } = {};
 
-// const Comp = defineComponent({
-//   component: (await import("../api.vue")).default,
-// });
-// console.log("Comp", Comp);
-
-// // const AsyncComp = defineComponent(() => {
-// //   import("../api.vue");
-// // });
-// const AsyncComp = defineAsyncComponent(() => import("../api.vue"));
-// console.log("AsyncComp: ", AsyncComp);
-
-// import { ref, h } from 'vue'
-
-// const Comp = defineComponent((props) => {
-//   // 就像在 <script setup> 中一样使用组合式 API
-//   const count = ref(0);
-
-//   return () => {
-//     // 渲染函数或 JSX
-//     return h(UseRequestDemo);
-//   };
-// });
-
-const Comp = defineComponent(
-  (props) => {
-    // 就像在 <script setup> 中一样使用组合式 API
-    return () => {
-      // 渲染函数或 JSX
-      return h("div", { class: "demoWrapper" }, [h(UseRequestDemo)]);
-    };
-  },
-  // 其他选项，例如声明 props 和 emits。
-  {
-    props: {
-      /* ... */
-    },
-  }
-);
+// runAsync();
 </script>
 <template>
-  <div>Demo.vue111</div>
-  <Comp />
-  <!-- <AsyncComp /> -->
-  <!-- <component :is="dynamicComponent" /> -->
+  <div>
+    <div>Demo 请求获取随机数</div>
+    data: {{ data }}
+    <br />
+    loading状态:{{ loading }}
+  </div>
 </template>
 <style></style>

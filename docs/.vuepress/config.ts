@@ -60,15 +60,15 @@ export default defineUserConfig({
       //   children: ["/useRequest/basic.md"],
       // },
       {
-        text: "aaa",
+        text: "useRequest",
         link: "/",
-        children: ["/bbb.md"],
+        children: ["/useRequest-quick.md", "/useRequest-basic.md"],
       },
       // 字符串 - 页面文件路径
       "/test/",
     ],
   }),
-  dest: `${__dirname}/docs`,
+  // dest: `${__dirname}/docs`,
   markdown: {
     importCode: {
       handleImportPath: (str) =>

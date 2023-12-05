@@ -31,7 +31,7 @@ export const useRequest: UseRequestFunction = (
   {
     dataFilter = (v: any) => v,
     defaultParams = {},
-    manual = true,
+    manual,
     onBefore,
     onSuccess,
     onError,
@@ -72,8 +72,10 @@ export const useRequest: UseRequestFunction = (
               onErrorFn(err);
             }
           );
+          console.log("response", response);
 
-          const value = dataFilter(response.data);
+          // const value = dataFilter(response.data);
+          const value = dataFilter(response);
           data.value = value;
           resolve(value);
           onSuccess?.(value);

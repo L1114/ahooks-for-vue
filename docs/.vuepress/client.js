@@ -17,6 +17,8 @@ const list = Object.entries(modules)
   .filter(Boolean);
 export default defineClientConfig({
   enhance({ app, router, siteData }) {
+    console.log("list", list);
+
     list.forEach(async ([key, value]) => {
       const component = (await value())?.default;
       if (key && component) {
@@ -24,12 +26,15 @@ export default defineClientConfig({
           // 就像在 <script setup> 中一样使用组合式 API
           return () => {
             // 渲染函数或 JSX
-            return h("div", { class: "demoWrapper", name: key }, [
+            return h("div", { class: "demoWrapper", name: key + "-1" }, [
               h(component),
             ]);
           };
         });
+        console.log("key, Comp", key, Comp);
         app.component(key, Comp);
+      } else {
+        console.warn("key, component", key, component);
       }
     });
   },

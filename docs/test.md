@@ -9,13 +9,14 @@
 <!-- <Demo /> -->
 
 <!-- <Api /> -->
- <UseRequestDemo />
+ <!-- <UseRequestDemo /> -->
+ <Demo />
 
 <!-- <test /> -->
 
 ::: details 点击查看代码
 
-@[code vue{2,4-5}](@/useRequest/UseRequestDemo.vue)
+<!-- @[code vue{2,4-5}](@/useRequest/UseRequestDemo.vue) -->
 
 :::
 

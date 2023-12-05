@@ -5,15 +5,13 @@
   border: 1px solid var(--c-border) !important;
   border-top: none !important;
 }
-
+code {
+  // color: rgba(225, 19, 19, 0.727);
+  color: var(--tip-color);
+  background: var(--c-bg-lighter) !important;
+}
 // markdown样式
 table {
-  code {
-    // color: rgba(225, 19, 19, 0.727);
-    color: var(--tip-color);
-    background: var(--c-bg-lighter) !important;
-  }
-
   thead {
     background: var(--c-bg-lighter);
   }
