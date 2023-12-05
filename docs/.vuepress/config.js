@@ -13,16 +13,17 @@ console.log("__dirname: ", __dirname);
 const alias = path.resolve(__dirname, "./components");
 // console.log("alias: ", alias);
 // import logo from "./pxlogo.jpg";
-
+const logo =
+  "https://images-kefu.pxb7.com/backstage/20231201/20231201174721_33444.jpg";
 export default defineUserConfig({
   lang: "zh-CN",
-  title: process.env.npm_package_version,
+  title: `${process.env.npm_package_version}`,
   description: "螃蟹🦀vue hooks库",
   plugins: [searchPlugin()],
-  head: [["link", { rel: "icon", href: "./pxlogo.jpg" }]],
+  head: [["link", { rel: "icon", href: logo }]],
   base: "/vueHooks-docs/",
   theme: defaultTheme({
-    logo: "https://images-kefu.pxb7.com/backstage/20231201/20231201174721_33444.jpg",
+    logo,
     // 在这里进行配置
     navbar: [
       // NavbarItem

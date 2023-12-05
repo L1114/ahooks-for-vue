@@ -9,6 +9,7 @@
     "lib",
     "package.json"
   ],
+  "readme": "docs/README.md",
   "main": "./packages/pxhooks.umd.js",
   "module": "./packages/pxhooks.js",
   "types": "./index.d.ts",
@@ -23,7 +24,8 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
     "babel": "babel packages --out-dir packages",
-    "buildDocs": "node ./buildDocs.js"
+    "buildDocs": "node ./buildDocs.js",
+    "release": "npm version patch && npm run docs:build && npm publish"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.4",
