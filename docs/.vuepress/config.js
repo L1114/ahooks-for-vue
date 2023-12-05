@@ -23,8 +23,6 @@ export default defineUserConfig({
   base: "/vueHooks-docs/",
   theme: defaultTheme({
     logo: "https://images-kefu.pxb7.com/backstage/20231201/20231201174721_33444.jpg",
-    home: "./",
-    docsDir: "./docs",
     // 在这里进行配置
     navbar: [
       // NavbarItem
@@ -69,8 +67,7 @@ export default defineUserConfig({
       "/test/",
     ],
   }),
-  // dest: "",
-  // `${sourceDir}/.vuepress/dist`
+  dest: `${__dirname}/docs`,
   markdown: {
     importCode: {
       handleImportPath: (str) =>
