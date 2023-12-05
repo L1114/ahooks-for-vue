@@ -25,7 +25,7 @@
     "docs:build": "vuepress build docs",
     "babel": "babel packages --out-dir packages",
     "buildDocs": "node ./buildDocs.js",
-    "release": "npm version patch --preid=beta && npm run docs:build && npm publish"
+    "release": "npm version prerelease --preid=beta && npm run docs:build && npm publish"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.4",
