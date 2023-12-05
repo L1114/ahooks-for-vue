@@ -17,5 +17,3 @@ const { data, error, loading } = useRequest(service);
 @[code vue{2,4-5}](@/useRequest/UseRequestDemo.vue)
 
 :::
-
-<Demo />

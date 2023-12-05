@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import * as useRequest from "../../../lib/useRequest/index";
+import { useRequest } from "../../../lib/useRequest/index";
 console.log("useRequest1", useRequest);
 
+// import * as test from "../../../lib/test/index";
+// console.log("test: ", test);
 const mockFetch: any = async () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -11,7 +13,7 @@ const mockFetch: any = async () => {
 };
 // console.log("useRequest", useRequest);
 
-const { runAsync, loading, data } = {};
+const { runAsync, loading, data } = useRequest(mockFetch, {});
 
 // runAsync();
 </script>

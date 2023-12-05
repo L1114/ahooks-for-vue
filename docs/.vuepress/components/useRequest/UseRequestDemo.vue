@@ -1,22 +1,14 @@
-<script setup lang="ts">
+<script setup>
 import { useRequest } from "../../../../lib/useRequest/index";
-console.log("useRequest: ", useRequest);
-const mockFetch = async () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(Math.random());
-    }, 1000);
-  });
-};
-const { runAsync, loading, data } = useRequest ? useRequest(mockFetch, {}) : {};
-runAsync();
+import { mockFetch } from "../api.js";
+
+const { loading, data } = useRequest ? useRequest(mockFetch, {}) : {};
 </script>
 <template>
   <div>
-    <div>请求获取随机数</div>
+    请求获取随机数 {{ loading ? "loading..." : "" }} <br />
     data: {{ data }}
     <br />
-    loading状态:{{ loading }}
   </div>
 </template>
 <style></style>

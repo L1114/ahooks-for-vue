@@ -68,7 +68,7 @@ export default defineUserConfig({
       "/test/",
     ],
   }),
-  // dest: `${__dirname}/docs`,
+  dest: `${__dirname}/docs`,
   markdown: {
     importCode: {
       handleImportPath: (str) =>
