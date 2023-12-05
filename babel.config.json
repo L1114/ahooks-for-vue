@@ -1,0 +1,23 @@
+{
+  // "presets": [
+  //   [
+  //     "@babel/preset-env",
+  //     {
+  //       "targets": {
+  //         "edge": "17",
+  //         "firefox": "60",
+  //         "chrome": "50",
+  //         "safari": "10",
+  //         "ie": "11"
+  //       },
+  //       "useBuiltIns": "usage",
+  //       "corejs": "3.6.5"
+  //     }
+  //   ]
+  // ]
+  "presets": [["@babel/preset-env"]],
+  // "presets": [["@babel/env"]],
+  // "plugins": ["@babel/plugin-transform-runtime"]
+
+  "plugins": [["@babel/plugin-transform-runtime"]]
+}

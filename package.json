@@ -1,0 +1,50 @@
+{
+  "name": "pxhooks",
+  "private": false,
+  "version": "0.0.10-beta",
+  "type": "module",
+  "files": [
+    "!/node_modules/",
+    "packages",
+    "lib",
+    "package.json"
+  ],
+  "main": "./packages/pxhooks.umd.js",
+  "module": "./packages/pxhooks.js",
+  "types": "./index.d.ts",
+  "exports": {
+    "types": "./index.d.ts",
+    "import": "./packages/pxhooks.js",
+    "require": "./packages/pxhooks.umd.js"
+  },
+  "scripts": {
+    "dev": "npm run docs:dev",
+    "build": "tsc && vite build && npm run babel && npm run docs:build && npm run buildDocs",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "babel": "babel packages --out-dir packages",
+    "buildDocs": "node ./buildDocs.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.5",
+    "@babel/plugin-transform-runtime": "^7.23.4",
+    "@babel/preset-env": "^7.23.5",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@vitejs/plugin-legacy": "^5.2.0",
+    "@vuepress/plugin-search": "^2.0.0-rc.0",
+    "cheerio": "^1.0.0-rc.12",
+    "markdown-it": "^13.0.2",
+    "markdown-it-container": "^3.0.0",
+    "markdown-it-regexp": "^0.4.0",
+    "rollup-plugin-copy": "^3.5.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0",
+    "vuepress": "^2.0.0-rc.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.23.5",
+    "vue-demi": "^0.14.6"
+  }
+}
