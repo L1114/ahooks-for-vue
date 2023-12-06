@@ -14,6 +14,6 @@ const { data, error, loading } = useRequest(service);
 
 ::: details 点击查看代码
 
-@[code vue{2,4-5}](@/useRequest/UseRequestDemo.vue)
+@[code vue](@/useRequest/UseRequestDemo.vue)
 
 :::

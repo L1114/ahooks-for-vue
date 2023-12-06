@@ -38,7 +38,7 @@ export const useRequest: UseRequestFunction = (
     onFinally,
     throttleWait = 0,
     throttleTrailing = false,
-  }
+  } = {}
 ) => {
   const data = ref(dataFilter(null));
   const loadingIds: any = ref([]);
@@ -121,7 +121,7 @@ export const useRequest: UseRequestFunction = (
       return fetchPromise(runAsyncParams);
     }
   };
-
+  console.log("manual", manual);
   !manual && runAsync();
   console.log("loadingIds", loadingIds);
 
@@ -132,4 +132,9 @@ export const useRequest: UseRequestFunction = (
     runAsync,
   };
   return res;
+};
+
+export const version = () => {
+  console.log("version");
+  return process.env.npm_package_version;
 };

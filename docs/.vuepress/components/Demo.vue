@@ -2,17 +2,8 @@
 import { useRequest } from "../../../lib/useRequest/index";
 console.log("useRequest1", useRequest);
 
-// import * as test from "../../../lib/test/index";
-// console.log("test: ", test);
-const mockFetch: any = async () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve(Math.random());
-    }, 1000);
-  });
-};
+import { mockFetch } from "./api.js";
 // console.log("useRequest", useRequest);
-
 const { runAsync, loading, data } = useRequest(mockFetch, {});
 
 // runAsync();

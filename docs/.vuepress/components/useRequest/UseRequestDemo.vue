@@ -1,8 +1,8 @@
 <script setup>
-import { useRequest } from "../../../../lib/useRequest/index";
+// import { useRequest } from "../../../../lib/useRequest/index";
+import { useRequest } from "pxhooks";
 import { mockFetch } from "../api.js";
-
-const { loading, data } = useRequest ? useRequest(mockFetch, {}) : {};
+const { loading, data } = useRequest(mockFetch, {});
 </script>
 <template>
   <div>

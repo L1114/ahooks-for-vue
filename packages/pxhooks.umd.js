@@ -4,90 +4,98 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _typeof2 = _interopRequireDefault(require("@babel/runtime/helpers/typeof"));
-(function (t, s) {
-  (typeof exports === "undefined" ? "undefined" : (0, _typeof2["default"])(exports)) == "object" && (typeof module === "undefined" ? "undefined" : (0, _typeof2["default"])(module)) < "u" ? s(exports, require("vue-demi")) : typeof define == "function" && define.amd ? define(["exports", "vue-demi"], s) : (t = (typeof globalThis === "undefined" ? "undefined" : (0, _typeof2["default"])(globalThis)) < "u" ? globalThis : t || self, s(t.pxhooks = {}, t.vueDemi));
-})(void 0, function (t, s) {
+(function (n, t) {
+  (typeof exports === "undefined" ? "undefined" : (0, _typeof2["default"])(exports)) == "object" && (typeof module === "undefined" ? "undefined" : (0, _typeof2["default"])(module)) < "u" ? t(exports, require("vue-demi")) : typeof define == "function" && define.amd ? define(["exports", "vue-demi"], t) : (n = (typeof globalThis === "undefined" ? "undefined" : (0, _typeof2["default"])(globalThis)) < "u" ? globalThis : n || self, t(n.pxhooks = {}, n.vueDemi));
+})(void 0, function (n, t) {
   "use strict";
 
-  var x = function x(y, _ref) {
-    var _ref$dataFilter = _ref.dataFilter,
-      v = _ref$dataFilter === void 0 ? function (f) {
+  var q = function q(y) {
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref$dataFilter = _ref.dataFilter,
+      T = _ref$dataFilter === void 0 ? function (f) {
         return f;
       } : _ref$dataFilter,
       _ref$defaultParams = _ref.defaultParams,
-      b = _ref$defaultParams === void 0 ? {} : _ref$defaultParams,
-      _ref$manual = _ref.manual,
-      g = _ref$manual === void 0 ? !0 : _ref$manual,
-      d = _ref.onBefore,
-      l = _ref.onSuccess,
-      o = _ref.onError,
-      r = _ref.onFinally,
+      I = _ref$defaultParams === void 0 ? {} : _ref$defaultParams,
+      b = _ref.manual,
+      l = _ref.onBefore,
+      c = _ref.onSuccess,
+      a = _ref.onError,
+      m = _ref.onFinally,
       _ref$throttleWait = _ref.throttleWait,
       i = _ref$throttleWait === void 0 ? 0 : _ref$throttleWait,
       _ref$throttleTrailing = _ref.throttleTrailing,
       j = _ref$throttleTrailing === void 0 ? !1 : _ref$throttleTrailing;
-    var f = s.ref(v(null)),
-      a = s.ref(!1),
-      T = s.ref(null);
-    var m = 0,
-      w = null;
-    var p = function p(n) {
-        return new Promise(function (q, h) {
-          var c = function c(e) {
-            h(e), o == null || o(e);
+    var f = t.ref(T(null)),
+      u = t.ref([]),
+      w = t.ref(null);
+    var p = 0,
+      x = null;
+    var r = function r(s) {
+        var h = Math.random();
+        return new Promise(function (v, g) {
+          var o = function o(e) {
+            g(e), a == null || a(e);
           };
-          d == null || d(), a.value = !0, m = Date.now(), (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
-            var e, u;
+          l == null || l(), u.value.push(h), p = Date.now(), (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee() {
+            var e, d, _e;
             return _regenerator["default"].wrap(function _callee$(_context) {
               while (1) switch (_context.prev = _context.next) {
                 case 0:
                   _context.prev = 0;
                   _context.next = 3;
-                  return y(n || b)["catch"](function (P) {
-                    c(P);
+                  return y(s || I)["catch"](function (M) {
+                    o(M);
                   });
                 case 3:
                   e = _context.sent;
-                  u = v(e.data);
-                  f.value = u, q(u), l == null || l(u);
-                  _context.next = 11;
+                  console.log("response", e);
+                  d = T(e);
+                  f.value = d, v(d), c == null || c(d);
+                  _context.next = 12;
                   break;
-                case 8:
-                  _context.prev = 8;
+                case 9:
+                  _context.prev = 9;
                   _context.t0 = _context["catch"](0);
-                  T.value = _context.t0, c(_context.t0);
-                case 11:
-                  _context.prev = 11;
-                  a.value = !1, r == null || r();
-                  return _context.finish(11);
-                case 14:
+                  w.value = _context.t0, o(_context.t0);
+                case 12:
+                  _context.prev = 12;
+                  _e = u.value.findIndex(function (d) {
+                    return d === h;
+                  });
+                  _e >= 0 && u.value.splice(_e, 1), m == null || m();
+                  return _context.finish(12);
+                case 16:
                 case "end":
                   return _context.stop();
               }
-            }, _callee, null, [[0, 8, 11, 14]]);
+            }, _callee, null, [[0, 9, 12, 16]]);
           }))();
         });
       },
-      D = function D(n) {
-        return !i || i <= 0 ? p(n) : Date.now() - m < i ? new Promise(function (h, c) {
-          var e = function e() {
-            clearTimeout(w);
-            var u = Date.now() - m;
-            w = setTimeout(function () {
-              u > i ? p(n).then(h)["catch"](c) : e();
-            }, i - u);
+      D = function D(s) {
+        return !i || i <= 0 ? r(s) : Date.now() - p < i ? new Promise(function (v, g) {
+          var o = function o() {
+            clearTimeout(x);
+            var e = Date.now() - p;
+            x = setTimeout(function () {
+              e > i ? r(s).then(v)["catch"](g) : o();
+            }, i - e);
           };
-          j && e();
-        }) : p(n);
+          j && o();
+        }) : r(s);
       };
-    return !g && D(), {
+    return !b && D(), console.log("loadingIds", u), {
       data: f,
-      loading: a,
-      error: T,
+      loading: t.computed(function () {
+        var s;
+        return ((s = u.value) == null ? void 0 : s.length) > 0;
+      }),
+      error: w,
       runAsync: D
     };
   };
-  t.useRequest = x, Object.defineProperty(t, Symbol.toStringTag, {
+  n.useRequest = q, Object.defineProperty(n, Symbol.toStringTag, {
     value: "Module"
   });
 });
