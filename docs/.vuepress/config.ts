@@ -9,7 +9,6 @@ import { searchPlugin } from "@vuepress/plugin-search";
 import { getDirname, path } from "@vuepress/utils";
 
 const __dirname = getDirname(import.meta.url);
-console.log("__dirname: ", __dirname);
 const alias = path.resolve(__dirname, "./components");
 
 const lib = path.resolve(__dirname, "../../lib/main.ts");

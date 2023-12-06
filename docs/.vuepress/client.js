@@ -31,7 +31,7 @@ export default defineClientConfig({
       list.forEach(async ([key, value], i) => {
         const component = (await value())?.default;
         if (key && component) {
-          console.log("key: ", key);
+          // console.log("key: ", key);
           const Comp = defineComponent(
             (props) => {
               // 就像在 <script setup> 中一样使用组合式 API

@@ -72,7 +72,7 @@ export const useRequest: UseRequestFunction = (
               onErrorFn(err);
             }
           );
-          console.log("response", response);
+          // console.log("response", response);
 
           // const value = dataFilter(response.data);
           const value = dataFilter(response);
@@ -123,7 +123,6 @@ export const useRequest: UseRequestFunction = (
   };
   console.log("manual", manual);
   !manual && runAsync();
-  console.log("loadingIds", loadingIds);
 
   const res = {
     data,

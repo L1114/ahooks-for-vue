@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useRequest, test } from "pxhooks";
-console.log("useRequest1", useRequest);
 
 import { mockFetch } from "./api.js";
 // console.log("useRequest", useRequest);
