@@ -26,7 +26,7 @@ const list = Object.entries(modules)
   .filter(Boolean);
 export default defineClientConfig({
   enhance({ app, router, siteData }) {
-    console.log("app._context.components", app._context.components);
+    // console.log("app._context.components", app._context.components);
     const fn = new Promise((resolve, reject) => {
       list.forEach(async ([key, value], i) => {
         const component = (await value())?.default;
@@ -50,10 +50,10 @@ export default defineClientConfig({
               name: key,
             }
           );
-          console.log("key, Comp", key, Comp);
+          // console.log("key, Comp", key, Comp);
           app.component(key, Comp);
         } else {
-          console.warn("key, component", key, component);
+          // console.warn("key, component", key, component);
         }
         if (i === list.length - 1) {
           setTimeout(() => {

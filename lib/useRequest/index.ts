@@ -133,8 +133,7 @@ export const useRequest: UseRequestFunction = (
   };
   return res;
 };
-
-export const version = () => {
-  console.log("version");
-  return process.env.npm_package_version;
+export const test = () => {
+  console.log("test");
+  return "test";
 };

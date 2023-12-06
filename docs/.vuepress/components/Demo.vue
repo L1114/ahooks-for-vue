@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRequest } from "../../../lib/useRequest/index";
+import { useRequest, test } from "pxhooks";
 console.log("useRequest1", useRequest);
 
 import { mockFetch } from "./api.js";

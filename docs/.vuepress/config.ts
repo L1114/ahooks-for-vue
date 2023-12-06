@@ -11,6 +11,8 @@ import { getDirname, path } from "@vuepress/utils";
 const __dirname = getDirname(import.meta.url);
 console.log("__dirname: ", __dirname);
 const alias = path.resolve(__dirname, "./components");
+
+const lib = path.resolve(__dirname, "../../lib/main.ts");
 // console.log("alias: ", alias);
 // import logo from "./pxlogo.jpg";
 const logo =
@@ -71,6 +73,9 @@ export default defineUserConfig({
     ],
   }),
   dest: `${__dirname}/docs`,
+  alias: {
+    pxhooks: lib,
+  },
   markdown: {
     importCode: {
       handleImportPath: (str) =>
