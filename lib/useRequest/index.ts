@@ -1,4 +1,4 @@
-import { ref } from "vue-demi";
+import { ref, computed } from "vue-demi";
 /**
  *
  * @param {function} api axios请求函数
@@ -41,7 +41,7 @@ export const useRequest: UseRequestFunction = (
   }
 ) => {
   const data = ref(dataFilter(null));
-  const loading = ref(false);
+  const loadingIds: any = ref([]);
   const error: any = ref(null);
   // let promiseInstance = null;
   let lastFetchTime = 0;
@@ -55,7 +55,7 @@ export const useRequest: UseRequestFunction = (
     // initLastFetchTimer = setTimeout(() => {
     //   lastFetchTime = 0;
     // }, Date.now() - lastFetchTime + 1);
-
+    const id = Math.random();
     return new Promise((resolve, reject) => {
       const onErrorFn = (e: any) => {
         reject(e);
@@ -63,7 +63,7 @@ export const useRequest: UseRequestFunction = (
       };
       // clearTimeout(throttleTimer);
       onBefore?.();
-      loading.value = true;
+      loadingIds.value.push(id);
       lastFetchTime = Date.now();
       (async () => {
         try {
@@ -83,7 +83,9 @@ export const useRequest: UseRequestFunction = (
           error.value = e;
           onErrorFn(e);
         } finally {
-          loading.value = false;
+          // loading.value.fi
+          let i = loadingIds.value.findIndex((d) => d === id);
+          i >= 0 && loadingIds.value.splice(i, 1);
           onFinally?.();
         }
       })();
@@ -121,10 +123,11 @@ export const useRequest: UseRequestFunction = (
   };
 
   !manual && runAsync();
+  console.log("loadingIds", loadingIds);
 
   const res = {
     data,
-    loading,
+    loading: computed(() => loadingIds.value?.length > 0),
     error,
     runAsync,
   };

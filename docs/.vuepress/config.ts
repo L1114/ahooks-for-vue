@@ -39,6 +39,8 @@ export default defineUserConfig({
     //   // 字符串 - 页面文件路径
     //   "/bar/README.md",
     // ],
+    sidebarDepth: 0,
+
     sidebar: [
       // {
       //   text: "Foo",
@@ -61,11 +63,11 @@ export default defineUserConfig({
       // },
       {
         text: "useRequest",
-        link: "/",
+        link: "/md/test.md",
         children: ["/useRequest-quick.md", "/useRequest-basic.md"],
       },
       // 字符串 - 页面文件路径
-      "/test/",
+      // "/test/",
     ],
   }),
   dest: `${__dirname}/docs`,

@@ -26,18 +26,23 @@ const list = Object.entries(modules)
   .filter(Boolean);
 export default defineClientConfig({
   enhance({ app, router, siteData }) {
-    // console.log("app._context.components", app._context.components);
+    console.log("app._context.components", app._context.components);
     const fn = new Promise((resolve, reject) => {
       list.forEach(async ([key, value], i) => {
         const component = (await value())?.default;
         if (key && component) {
+          console.log("key: ", key);
           const Comp = defineComponent(
             (props) => {
               // 就像在 <script setup> 中一样使用组合式 API
 
               return () => {
                 // 渲染函数或 JSX
-                return h("div", { class: "demoWrapper" }, [h(component)]);
+                return h(
+                  "div",
+                  { class: key !== "ReadmeCom" && "demoWrapper" },
+                  [h(component)]
+                );
               };
             },
             // 其他选项，例如声明 props 和 emits。
