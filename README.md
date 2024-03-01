@@ -15,17 +15,17 @@ Vue Hooks 库
 ## 📦 安装
 
 ```bash
-$ npm install --save pxhooks
+$ npm install --save ahooks-for-vue
 # or
-$ yarn add pxhooks
+$ yarn add ahooks-for-vue
 # or
-$ pnpm add pxhooks
+$ pnpm add ahooks-for-vue
 # or
-$ bun add pxhooks
+$ bun add ahooks-for-vue
 ```
 
 ## 🔨 使用
 
 ```js
-import { useRequest } from "pxhooks";
+import { useRequest } from "ahooks-for-vue";
 ```

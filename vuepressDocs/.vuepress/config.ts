@@ -71,10 +71,10 @@ export default defineUserConfig({
       // "/test/",
     ],
   }),
-  dest:path.resolve(__dirname, "../../documents"),
+  dest:path.resolve(__dirname, "../../docs"),
   //  `${__dirname}/documents`,
   alias: {
-    pxhooks: lib,
+    "ahooks-for-vue": lib,
   },
   markdown: {
     importCode: {

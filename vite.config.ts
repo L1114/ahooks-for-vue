@@ -27,7 +27,7 @@ export default defineConfig({
     minify: true,
     lib: {
       entry: path.resolve("./lib/main.ts"),
-      name: "pxhooks",
+      name: "ahooks-for-vue",
     },
     outDir: "packages",
     rollupOptions: {

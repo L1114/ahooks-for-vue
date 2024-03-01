@@ -1,5 +1,5 @@
 {
-  "name": "pxhooks",
+  "name": "ahooks-for-vue",
   "private": false,
   "version": "0.1.1-beta.1",
   "type": "module",
@@ -9,20 +9,20 @@
     "lib",
     "package.json"
   ],
-  "readme": "docs/README.md",
-  "main": "./packages/pxhooks.umd.js",
-  "module": "./packages/pxhooks.js",
+  "readme": "vuepressDocs/README.md",
+  "main": "./packages/ahooks-for-vue.umd.js",
+  "module": "./packages/ahooks-for-vue.js",
   "types": "./index.d.ts",
   "exports": {
     "types": "./index.d.ts",
-    "import": "./packages/pxhooks.js",
-    "require": "./packages/pxhooks.umd.js"
+    "import": "./packages/ahooks-for-vue.js",
+    "require": "./packages/ahooks-for-vue.umd.js"
   },
   "scripts": {
-    "dev": "npm run docs:dev",
+    "dev": "npm run vuepressDocs:dev",
     "build": "tsc && vite build && npm run babel && npm run docs:build && npm run buildDocs",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
+    "docs:dev": "vuepress dev vuepressDocs",
+    "docs:build": "vuepress build vuepressDocs",
     "babel": "babel packages --out-dir packages",
     "buildDocs": "node ./buildDocs.js",
     "release": "npm version prerelease --preid=beta && npm run build && npm publish"
@@ -40,7 +40,7 @@
     "markdown-it": "^13.0.2",
     "markdown-it-container": "^3.0.0",
     "markdown-it-regexp": "^0.4.0",
-    "pxhooks": "^0.0.11-beta.1",
+    "ahooks-for-vue": "^0.0.11-beta.1",
     "rollup-plugin-copy": "^3.5.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",

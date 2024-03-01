@@ -1,6 +1,6 @@
 <script setup>
 import { mockFetch } from "../api.js";
-import { useRequest, test } from "pxhooks";
+import { useRequest, test } from "ahooks-for-vue";
 console.log("test: ", test());
 // console.log("Demo2: ", Demo2);
 
