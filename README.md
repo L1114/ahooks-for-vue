@@ -2,7 +2,7 @@ Vue Hooks 库
 
 ## 📚 文档
 
-- [查看文档](https://l1114.github.io/vueHooks-docs/)
+- [查看文档](https://l1114.github.io/ahooks-for-vue/)
 
 ## ✨ 特性
 

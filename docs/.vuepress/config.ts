@@ -22,7 +22,7 @@ export default defineUserConfig({
   description: "螃蟹🦀vue hooks库",
   plugins: [searchPlugin()],
   head: [["link", { rel: "icon", href: logo }]],
-  base: "/vueHooks-docs/",
+  base: "/ahooks-for-vue/",
   theme: defaultTheme({
     logo,
     // 在这里进行配置
@@ -71,7 +71,8 @@ export default defineUserConfig({
       // "/test/",
     ],
   }),
-  dest: `${__dirname}/docs`,
+  dest:path.resolve(__dirname, "../../documents"),
+  //  `${__dirname}/documents`,
   alias: {
     pxhooks: lib,
   },
