@@ -1,0 +1,1 @@
+import{_ as o,r as n,o as t,c,a}from"./app-bfQi4rOa.js";const r={};function _(s,m){const e=n("ReadmeCom");return t(),c("div",null,[a(e)])}const d=o(r,[["render",_],["__file","index.html.vue"]]);export{d as default};
