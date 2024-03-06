@@ -1,6 +1,6 @@
 import { Service, Options, FetchState } from "./type";
 import Fetch from "./Fetch";
-import { toRef, ref } from "vue-demi";
+import { toRef, onMounted, onUnmounted } from "vue-demi";
 
 const useRequestImplement = <TData, TParams extends any[]>(
   service: Service<TData, TParams>,
@@ -13,8 +13,17 @@ const useRequestImplement = <TData, TParams extends any[]>(
   let params = fetchInstance.state.params || options.defaultParams || [];
   //@ts-ignore
   params = Array.isArray(params) ? params : [params];
-  fetchInstance.run(...params);
+
+  onMounted(() => {
+    if (!options?.manual) {
+      fetchInstance.run(...params);
+    }
+  });
+  onUnmounted(() => {
+    fetchInstance.cancel();
+  });
   return {
+    // loading: toRef(fetchInstance.state, "loading"),
     loading: toRef(fetchInstance.state, "loading"),
     data: toRef(fetchInstance.state, "data"),
     error: toRef(fetchInstance.state, "error"),
