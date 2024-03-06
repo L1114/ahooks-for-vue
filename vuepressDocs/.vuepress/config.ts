@@ -19,7 +19,7 @@ const logo = "./logo.png";
 export default defineUserConfig({
   lang: "zh-CN",
   title: `${process.env.npm_package_version}`,
-  description: "螃蟹🦀vue hooks库",
+  description: "vue版本的ahooks库",
   plugins: [searchPlugin()],
   head: [["link", { rel: "icon", href: logo }]],
   base: "/ahooks-for-vue/",
