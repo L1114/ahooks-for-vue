@@ -14,8 +14,8 @@ const alias = path.resolve(__dirname, "./components");
 const lib = path.resolve(__dirname, "../../lib/main.ts");
 // console.log("alias: ", alias);
 // import logo from "./pxlogo.jpg";
-const logo =  "./logo.png"
-  // "https://images-kefu.pxb7.com/backstage/20231201/20231201174721_33444.jpg";
+const logo = "./logo.png";
+// "https://images-kefu.pxb7.com/backstage/20231201/20231201174721_33444.jpg";
 export default defineUserConfig({
   lang: "zh-CN",
   title: `${process.env.npm_package_version}`,
@@ -65,13 +65,17 @@ export default defineUserConfig({
       {
         text: "useRequest",
         link: "/md/test.md",
-        children: ["/useRequest-quick.md", "/useRequest-basic.md"],
+        children: [
+          "/useRequest-quick.md",
+          "/useRequest-basic.md",
+          "/useRequest-throttle",
+        ],
       },
       // 字符串 - 页面文件路径
       // "/test/",
     ],
   }),
-  dest:path.resolve(__dirname, "../../docs"),
+  dest: path.resolve(__dirname, "../../docs"),
   //  `${__dirname}/documents`,
   alias: {
     "ahooks-for-vue": lib,

@@ -1,1 +1,2 @@
-export * from "./useRequest/index";
+import useRequest from "./useRequest/index";
+export { useRequest };

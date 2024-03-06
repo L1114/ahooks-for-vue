@@ -1,11 +1,6 @@
 <script setup>
 import { mockFetch } from "../api.js";
-// import { useRequest, test } from "ahooks-for-vue";
-
-import useRequest from "../../../../lib/useRequest/useRequest";
-// console.log("useRequest: ", useRequest(mockFetch, {}));
-
-// console.log("Demo2: ", Demo2);
+import { useRequest } from "ahooks-for-vue";
 
 const { loading, data, run } = useRequest(mockFetch, {});
 </script>

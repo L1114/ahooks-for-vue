@@ -34,13 +34,14 @@
     "@babel/preset-env": "^7.23.5",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@types/lodash": "^4.14.202",
     "@vitejs/plugin-legacy": "^5.2.0",
     "@vuepress/plugin-search": "^2.0.0-rc.0",
+    "ahooks-for-vue": "^0.0.11-beta.1",
     "cheerio": "^1.0.0-rc.12",
     "markdown-it": "^13.0.2",
     "markdown-it-container": "^3.0.0",
     "markdown-it-regexp": "^0.4.0",
-    "ahooks-for-vue": "^0.0.11-beta.1",
     "rollup-plugin-copy": "^3.5.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
@@ -48,6 +49,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.23.5",
+    "lodash": "^4.17.21",
     "vue-demi": "^0.14.6"
   }
 }

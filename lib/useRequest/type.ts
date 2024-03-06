@@ -1,4 +1,4 @@
-import { Ref } from "vue-demi";
+import type Fetch from './Fetch';
 // export type Service<TData, TParams extends any[]> = (...args: TParams) => Promise<TData>;
 
 export type Service<TData, TParams extends any[]> = (
@@ -69,3 +69,28 @@ export interface Options<TData, TParams extends any[]> {
 }
 
 export type Subscribe = () => void;
+export interface PluginReturn<TData, TParams extends any[]> {
+  onBefore?: (params: TParams) =>
+    | ({
+        stopNow?: boolean;
+        returnNow?: boolean;
+      } & Partial<FetchState<TData, TParams>>)
+    | void;
+
+  onRequest?: (
+    service: Service<TData, TParams>,
+    params: TParams,
+  ) => {
+    servicePromise?: Promise<TData>;
+  };
+
+  onSuccess?: (data: TData, params: TParams) => void;
+  onError?: (e: Error, params: TParams) => void;
+  onFinally?: (params: TParams, data?: TData, e?: Error) => void;
+  onCancel?: () => void;
+  onMutate?: (data: TData) => void;
+}
+export type Plugin<TData, TParams extends any[]> = {
+  (fetchInstance:Fetch<TData,TParams>,options:Options<TData,TParams>):PluginReturn<TData,TParams>;
+  onInit?: (options: Options<TData, TParams>) => Partial<FetchState<TData, TParams>>;
+};

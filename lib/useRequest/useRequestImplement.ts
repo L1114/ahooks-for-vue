@@ -1,11 +1,11 @@
-import { Service, Options, FetchState } from "./type";
+import { Service, Options, Plugin } from "./type";
 import Fetch from "./Fetch";
 import { toRef, onMounted, onUnmounted } from "vue-demi";
 
 const useRequestImplement = <TData, TParams extends any[]>(
   service: Service<TData, TParams>,
   options: Options<TData, TParams> = {},
-  plugins = []
+  plugins: Plugin<TData, TParams>[] = []
 ) => {
   const fetchInstance = new Fetch(service, options, () => {}, plugins);
 
@@ -13,7 +13,7 @@ const useRequestImplement = <TData, TParams extends any[]>(
   let params = fetchInstance.state.params || options.defaultParams || [];
   //@ts-ignore
   params = Array.isArray(params) ? params : [params];
-
+  plugins.map((p) => p(fetchInstance, options));
   onMounted(() => {
     if (!options?.manual) {
       fetchInstance.run(...params);
