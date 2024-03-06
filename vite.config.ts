@@ -4,7 +4,7 @@ import path from "path";
 import copy from "rollup-plugin-copy";
 import legacy from "@vitejs/plugin-legacy";
 import resolve from "@rollup/plugin-node-resolve";
-import babel from "@rollup/plugin-babel";
+// import babel from "@rollup/plugin-babel";
 // import babel from 'vite-plugin-babel';
 
 export default defineConfig({
@@ -43,7 +43,7 @@ export default defineConfig({
       },
       plugins: [
         resolve(),
-        babel({ babelHelpers: "bundled" }),
+        // babel({ babelHelpers: "bundled" }),
 
         // copy({
         //   targets: [{ src: "lib", dest: path.resolve("./dist/") }],
