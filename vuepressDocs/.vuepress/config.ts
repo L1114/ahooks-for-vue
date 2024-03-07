@@ -12,10 +12,7 @@ const __dirname = getDirname(import.meta.url);
 const alias = path.resolve(__dirname, "./components");
 
 const lib = path.resolve(__dirname, "../../lib/main.ts");
-// console.log("alias: ", alias);
-// import logo from "./pxlogo.jpg";
 const logo = "./logo.png";
-// "https://images-kefu.pxb7.com/backstage/20231201/20231201174721_33444.jpg";
 export default defineUserConfig({
   lang: "zh-CN",
   title: `${process.env.npm_package_version}`,

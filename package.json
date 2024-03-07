@@ -9,6 +9,12 @@
     "lib",
     "package.json"
   ],
+  "repository": "https://github.com/L1114/ahooks-for-vue",
+  "Homepage": "https://l1114.github.io/ahooks-for-vue/",
+  "bugs": {
+    "url": "https://github.com/L1114/ahooks-for-vue/issues",
+    "email": "zlei0885@163.com"
+  },
   "readme": "vuepressDocs/README.md",
   "main": "./packages/ahooks-for-vue.umd.js",
   "module": "./packages/ahooks-for-vue.js",
@@ -51,5 +57,6 @@
     "@babel/runtime": "^7.23.5",
     "lodash": "^4.17.21",
     "vue-demi": "^0.14.6"
-  }
+  },
+  "license": "MIT"
 }

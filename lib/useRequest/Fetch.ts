@@ -47,7 +47,7 @@ export default class Fetch<TData, TParams extends any[]> {
       this.state.error = undefined;
       this.state.loading = false;
       return res;
-    } catch (error) {
+    } catch (error: any) {
       if (currentCount !== this.count) {
         return new Promise(() => {});
       }

@@ -18,6 +18,7 @@ const useThrottlePlugin: Plugin<any, any[]> = (
   if (throttleWait !== undefined && throttleWait > 0) {
     const originRunAsync = fetchInstance.runAsync.bind(fetchInstance);
     const runAsync = throttle(originRunAsync, throttleWait, options);
+    //@ts-ignore
     fetchInstance.runAsync = runAsync.bind(fetchInstance);
   }
 

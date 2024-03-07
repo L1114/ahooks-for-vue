@@ -13,13 +13,12 @@ const { data, run } = useRequest(getUsername, {
 
 你可以在下面 input 框中快速输入文本，体验效果
 <UseRequestDemoThrottle />
+
 ::: details 点击查看代码
-
 @[code vue](@/useRequest/UseRequestDemoThrottle.vue)
+:::
 
-## API
-
-### Options
+### API Options
 
 throttle 所有参数用法和效果同 [lodash.throttle](https://www.lodashjs.com/docs/lodash.throttle/)
 
