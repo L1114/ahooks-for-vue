@@ -7,7 +7,8 @@
     "!/node_modules/",
     "packages",
     "lib",
-    "package.json"
+    "package.json",
+    "types"
   ],
   "repository": "https://github.com/L1114/ahooks-for-vue",
   "Homepage": "https://l1114.github.io/ahooks-for-vue/",
@@ -18,20 +19,21 @@
   "readme": "vuepressDocs/README.md",
   "main": "./packages/ahooks-for-vue.umd.js",
   "module": "./packages/ahooks-for-vue.js",
-  "types": "./index.d.ts",
+  "types": "./types/main.d.ts",
   "exports": {
-    "types": "./index.d.ts",
+    "types": "./types/main.d.ts",
     "import": "./packages/ahooks-for-vue.js",
     "require": "./packages/ahooks-for-vue.umd.js"
   },
   "scripts": {
     "dev": "npm run vuepressDocs:dev",
-    "build": "tsc && vite build && npm run babel && npm run docs:build && npm run buildDocs",
+    "build": "tsc --build && vite build && npm run babel && npm run docs:build && npm run buildDocs",
     "docs:dev": "vuepress dev vuepressDocs",
     "docs:build": "vuepress build vuepressDocs",
     "babel": "babel packages --out-dir packages",
     "buildDocs": "node ./buildDocs.js",
-    "release": "npm version prerelease --preid=beta && npm run build && npm publish"
+    "release": "npm version prerelease --preid=beta && npm run build && npm publish",
+    "delete": "rm -r types dist packages"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.4",

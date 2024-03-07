@@ -8,10 +8,10 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    // "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "noEmit": false,
 
     /* Linting */
     "strict": true,
@@ -20,7 +20,7 @@
     "noFallthroughCasesInSwitch": true,
 
     // "rootDir": ".",
-    // "outDir": "dist2",
+    "outDir": "packages",
     // "composite": true,
     "declaration": true,
     "declarationDir": "./types"
