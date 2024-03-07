@@ -12,10 +12,10 @@ const { data, run } = useRequest(getUsername, {
 如上示例代码，频繁触发 `run`，只会每隔 300ms 执行一次。
 
 你可以在下面 input 框中快速输入文本，体验效果
-<UseRequestDemoThrottle />
+<useRequest-throttle-demo />
 
 ::: details 点击查看代码
-@[code vue](@/useRequest/UseRequestDemoThrottle.vue)
+@[code vue](./demo.vue)
 :::
 
 ### API Options

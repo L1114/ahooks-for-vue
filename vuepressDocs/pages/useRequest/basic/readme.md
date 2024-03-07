@@ -10,11 +10,11 @@
 const { data, error, loading } = useRequest(service);
 ```
 
-<UseRequestDemo />
+<useRequest-basic-demo />
 
 ::: details 点击查看代码
 
-@[code vue](@/useRequest/UseRequestDemo.vue)
+@[code vue](./demo.vue)
 
 :::
 

@@ -1,5 +1,5 @@
 <script setup>
-import { mockFetchFast } from "../api.js";
+import { mockFetchFast } from "@/api";
 import { useRequest } from "ahooks-for-vue";
 
 const { loading, data, run } = useRequest(mockFetchFast, {

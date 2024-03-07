@@ -1,10 +1,3 @@
----
-# nav:
-#   path: /hooks
-# group:
-#   path: /use-request
----
-
 # 快速上手
 
 `useRequest` 是一个强大的异步数据管理的 Vue 项目中的网络请求场景使用 `useRequest` 就够了 `(划线代表暂未实现)`。

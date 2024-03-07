@@ -2,6 +2,7 @@ import { defineUserConfig } from "vuepress";
 import { viteBundler } from "@vuepress/bundler-vite";
 import { defaultTheme } from "@vuepress/theme-default";
 import { searchPlugin } from "@vuepress/plugin-search";
+// import vue from "@vitejs/plugin-vue";
 
 // import { myPlugin, vitePlugin, markdownPlugin } from "./myPlugin.js";
 
@@ -9,7 +10,8 @@ import { searchPlugin } from "@vuepress/plugin-search";
 import { getDirname, path } from "@vuepress/utils";
 
 const __dirname = getDirname(import.meta.url);
-const alias = path.resolve(__dirname, "./components");
+const alias = path.resolve(__dirname, "../pages");
+// const aliasApi = path.resolve(__dirname, "../pages/api.js");
 
 const lib = path.resolve(__dirname, "../../lib/main.ts");
 const logo = "./logo.png";
@@ -40,42 +42,31 @@ export default defineUserConfig({
     sidebarDepth: 0,
 
     sidebar: [
-      // {
-      //   text: "Foo",
-      //   link: "/foo/",
-      //   children: [
-      //     // SidebarItem
-      //     {
-      //       text: "github",
-      //       link: "https://github.com",
-      //       children: [],
-      //     },
-      //     // 字符串 - 页面文件路径
-      //     "/foo/bar.md",
-      //   ],
-      // },
-      // {
-      //   text: "useRequest",
-      //   link: "/useRequest/",
-      //   children: ["/useRequest/basic.md"],
-      // },
+      {
+        text: "指南",
+        link: "/README.md",
+      },
       {
         text: "useRequest",
-        link: "/md/test.md",
+        link: "/pages/useRequest/quick/readme.md",
         children: [
-          "/useRequest-quick.md",
-          "/useRequest-basic.md",
-          "/useRequest-throttle",
+          // {
+          //   text: "指南2",
+          //   link: "/pages/useRequest/useRequest-quick.md",
+          // },
+          "/pages/useRequest/quick",
+          "/pages/useRequest/basic",
+          "/pages/useRequest/throttle",
         ],
       },
-      // 字符串 - 页面文件路径
-      // "/test/",
     ],
   }),
   dest: path.resolve(__dirname, "../../docs"),
   //  `${__dirname}/documents`,
   alias: {
     "ahooks-for-vue": lib,
+    "@": alias,
+    // aliasApi
   },
   markdown: {
     importCode: {
@@ -83,7 +74,6 @@ export default defineUserConfig({
         str.replace(/^@/, path.resolve(__dirname, alias)),
     },
   },
-
   bundler: viteBundler({
     viteOptions: {
       // plugins: [myPlugin()],
