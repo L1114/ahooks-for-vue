@@ -2,7 +2,7 @@
 import { mockFetch } from "@/api";
 import { useRequest } from "ahooks-for-vue";
 
-const { loading, data, run } = useRequest(() => {}, {});
+const { loading, data, run } = useRequest(mockFetch, {});
 </script>
 <template>
   <div>
