@@ -1,3 +1,0 @@
-import{u as c,m}from"./api-Wajlme2l.js";import{_,o as d,c as i,d as e,u as t,e as a,t as o,g as n}from"./app-zUonB3Xg.js";import"./commonjsHelpers-1J56E-h6.js";const p=e("br",null,null,-1),f=e("br",null,null,-1),b={__name:"UseRequestDemo",setup(g){const{loading:r,data:u,run:l}=c(m,{});return(k,s)=>(d(),i("div",null,[e("button",{onClick:s[0]||(s[0]=()=>t(l)(6))},"请求获取随机数"),a(" "+o(t(r)?"loading...":"")+" ",1),p,a(" data: "+o(t(u)),1),f,n(" test: {{ test }} <br /> "),n(` test2: {{ test2 && test2.data }}
-    <br />
-    state: {{ state && state.data }} `)]))}},R=_(b,[["__file","UseRequestDemo.vue"]]);export{R as default};
