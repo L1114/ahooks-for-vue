@@ -17,7 +17,14 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    // "rootDir": ".",
+    // "outDir": "dist2",
+    // "composite": true,
+    "declaration": true,
+    "declarationDir": "./types"
   },
-  "include": ["src"]
+  "include": ["lib"]
+  // "exclude": ["**.spec.ts"]
 }
