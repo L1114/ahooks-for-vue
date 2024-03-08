@@ -1,6 +1,7 @@
 import { Service, Options, Plugin } from "./type";
 import useRequestImplement from "./useRequestImplement";
 import useThrottlePlugin from "./useThrottlePlugin";
+import useDebouncePlugin from "./useDebouncePlugin";
 
 const useRequest = <TData, TParams extends any[]>(
   service: Service<TData, TParams>,
@@ -10,6 +11,7 @@ const useRequest = <TData, TParams extends any[]>(
   return useRequestImplement<TData, TParams>(service, options, [
     ...(plugins || []),
     useThrottlePlugin,
+    useDebouncePlugin,
   ] as Plugin<TData, TParams>[]);
 };
 

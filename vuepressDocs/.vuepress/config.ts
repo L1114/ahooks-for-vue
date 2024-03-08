@@ -57,6 +57,7 @@ export default defineUserConfig({
           "/pages/useRequest/quick",
           "/pages/useRequest/basic",
           "/pages/useRequest/throttle",
+          "/pages/useRequest/debounce",
         ],
       },
     ],
