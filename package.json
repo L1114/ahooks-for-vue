@@ -27,7 +27,7 @@
   },
   "scripts": {
     "dev": "npm run vuepressDocs:dev",
-    "build": "tsc --build && vite build && npm run babel && npm run docs:build && npm run buildDocs",
+    "build": "tsc --build && vite build && npm run babel && npm run docs:build",
     "docs:dev": "vuepress dev vuepressDocs",
     "docs:build": "vuepress build vuepressDocs",
     "babel": "babel packages --out-dir packages",
