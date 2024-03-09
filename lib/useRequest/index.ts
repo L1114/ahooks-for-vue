@@ -1,7 +1,7 @@
 import { Service, Options, Plugin } from "./type";
 import useRequestImplement from "./useRequestImplement";
-import useThrottlePlugin from "./useThrottlePlugin";
-import useDebouncePlugin from "./useDebouncePlugin";
+import useThrottlePlugin from "./plugins/useThrottlePlugin";
+import useDebouncePlugin from "./plugins/useDebouncePlugin";
 
 const useRequest = <TData, TParams extends any[]>(
   service: Service<TData, TParams>,

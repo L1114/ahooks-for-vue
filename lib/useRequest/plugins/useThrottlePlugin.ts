@@ -1,5 +1,5 @@
 import throttle from "lodash/throttle";
-import { Plugin } from "./type";
+import { Plugin } from "../type";
 // import type Fetch from "./Fetch";
 import type { ThrottleSettings } from "lodash";
 

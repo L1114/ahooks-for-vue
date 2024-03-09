@@ -1,5 +1,5 @@
 import debounce from "lodash/debounce";
-import { Plugin } from "./type";
+import { Plugin } from "../type";
 // import type Fetch from "./Fetch";
 import type { DebounceSettings } from "lodash";
 
