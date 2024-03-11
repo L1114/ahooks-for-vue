@@ -78,6 +78,7 @@ export default class Fetch<TData, TParams extends any[]> {
     this.count++;
     this.state.loading = false;
     // this.state.error = undefined;
+    this.pluginsLifecycleHook("onCancel");
   }
 
   mutate(value: TData) {
