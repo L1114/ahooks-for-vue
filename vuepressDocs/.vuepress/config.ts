@@ -23,6 +23,9 @@ import { globSync } from "glob";
 const files = globSync("**/vuepressDocs/pages/**/readme.md");
 const routesObject = {};
 files.forEach((ele) => {
+  if (ele?.match(/\/useRequest\//)) {
+    return;
+  }
   const route = ele?.replace(/vuepressDocs|\/readme\.md/g, "");
   const key = route.split("/")?.[2];
   const item = routesObject[key];
@@ -34,7 +37,6 @@ files.forEach((ele) => {
       children: [route],
     };
   }
-  return route;
 });
 const sidebar = Object.values(routesObject);
 console.log("sidebar: ", sidebar);
@@ -70,26 +72,20 @@ export default defineUserConfig({
         text: "指南",
         link: "/README.md",
       },
-      // @ts-ignore
+      {
+        text: "useRequest",
+        link: "/pages/useRequest/quick/readme.md",
+        children: [
+          "/pages/useRequest/quick",
+          "/pages/useRequest/basic",
+          "/pages/useRequest/throttle",
+          "/pages/useRequest/debounce",
+          "/pages/useRequest/ready",
+          "/pages/useRequest/polling",
+        ],
+      },
       ...sidebar,
-      // {
-      //   text: "useRequest",
-      //   link: "/pages/useRequest/quick/readme.md",
-      //   children: routes,
-      //   //  [
-      //   //   // {
-      //   //   //   text: "指南2",
-      //   //   //   link: "/pages/useRequest/useRequest-quick.md",
-      //   //   // },
-      //   //   "/pages/useRequest/quick",
-      //   //   "/pages/useRequest/basic",
-      //   //   "/pages/useRequest/throttle",
-      //   //   "/pages/useRequest/debounce",
-      //   //   "/pages/useRequest/ready",
-      //   //   "/pages/useRequest/polling",
-      //   // ],
-      // },
-    ],
+    ] as any,
   }),
   dest: path.resolve(__dirname, "../../docs"),
   //  `${__dirname}/documents`,
