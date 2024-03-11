@@ -15,6 +15,30 @@ const alias = path.resolve(__dirname, "../pages");
 
 const lib = path.resolve(__dirname, "../../lib/main.ts");
 const logo = "./logo.png";
+// @ts-ignore
+// const routes = import.meta.glob("../pages/**/*.readme.md");
+// console.log("routes: ", routes);
+// const { glob, globSync, globStream, globStreamSync, Glob } = require("glob");
+import { globSync } from "glob";
+const files = globSync("**/vuepressDocs/pages/**/readme.md");
+const routesObject = {};
+files.forEach((ele) => {
+  const route = ele?.replace(/vuepressDocs|\/readme\.md/g, "");
+  const key = route.split("/")?.[2];
+  const item = routesObject[key];
+  if (item) {
+    item.children.push(route);
+  } else {
+    routesObject[key] = {
+      text: key,
+      children: [route],
+    };
+  }
+  return route;
+});
+const sidebar = Object.values(routesObject);
+console.log("sidebar: ", sidebar);
+
 export default defineUserConfig({
   lang: "zh-CN",
   title: `${process.env.npm_package_version}`,
@@ -46,22 +70,25 @@ export default defineUserConfig({
         text: "指南",
         link: "/README.md",
       },
-      {
-        text: "useRequest",
-        link: "/pages/useRequest/quick/readme.md",
-        children: [
-          // {
-          //   text: "指南2",
-          //   link: "/pages/useRequest/useRequest-quick.md",
-          // },
-          "/pages/useRequest/quick",
-          "/pages/useRequest/basic",
-          "/pages/useRequest/throttle",
-          "/pages/useRequest/debounce",
-          "/pages/useRequest/ready",
-          "/pages/useRequest/polling",
-        ],
-      },
+      // @ts-ignore
+      ...sidebar,
+      // {
+      //   text: "useRequest",
+      //   link: "/pages/useRequest/quick/readme.md",
+      //   children: routes,
+      //   //  [
+      //   //   // {
+      //   //   //   text: "指南2",
+      //   //   //   link: "/pages/useRequest/useRequest-quick.md",
+      //   //   // },
+      //   //   "/pages/useRequest/quick",
+      //   //   "/pages/useRequest/basic",
+      //   //   "/pages/useRequest/throttle",
+      //   //   "/pages/useRequest/debounce",
+      //   //   "/pages/useRequest/ready",
+      //   //   "/pages/useRequest/polling",
+      //   // ],
+      // },
     ],
   }),
   dest: path.resolve(__dirname, "../../docs"),

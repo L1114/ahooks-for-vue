@@ -46,6 +46,7 @@
     "@vuepress/plugin-search": "^2.0.0-rc.0",
     "ahooks-for-vue": "^0.0.11-beta.1",
     "cheerio": "^1.0.0-rc.12",
+    "glob": "^10.3.10",
     "markdown-it": "^13.0.2",
     "markdown-it-container": "^3.0.0",
     "markdown-it-regexp": "^0.4.0",
