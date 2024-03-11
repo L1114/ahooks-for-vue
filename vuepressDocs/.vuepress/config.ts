@@ -59,6 +59,7 @@ export default defineUserConfig({
           "/pages/useRequest/throttle",
           "/pages/useRequest/debounce",
           "/pages/useRequest/ready",
+          "/pages/useRequest/polling",
         ],
       },
     ],
