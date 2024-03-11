@@ -1,22 +1,23 @@
 import { Plugin } from "../type";
 
-import { onMounted, onUnmounted, watch, Ref, isRef } from "vue-demi";
+import { onMounted, onUnmounted, watch, Ref, isRef, ref } from "vue-demi";
 const useAutoRunPlugin: Plugin<any, any[]> = (
   fetchInstance,
-  { manual, ready }
+  { manual, ready = ref(true) }
 ) => {
   let stopNow = false;
   onMounted(() => {
-    const _ready =
-      ready === undefined ? true : isRef(ready) ? ready.value : !!ready;
+    const _ready = isRef(ready) ? ready.value : !!ready;
+    stopNow = !_ready;
     if (!manual && _ready) {
       fetchInstance.run(...(fetchInstance.state.params || []));
     }
   });
   onUnmounted(() => {
     fetchInstance.cancel();
+    stopWatch();
   });
-  watch(ready as Ref<boolean>, (newV, oldV) => {
+  const stopWatch = watch(ready as Ref<boolean>, (newV, oldV) => {
     stopNow = !newV;
     // console.log("stopNow: ", stopNow);
     // console.log("manual :>> ", manual);
