@@ -58,6 +58,7 @@ export default defineUserConfig({
           "/pages/useRequest/basic",
           "/pages/useRequest/throttle",
           "/pages/useRequest/debounce",
+          "/pages/useRequest/ready",
         ],
       },
     ],
@@ -67,6 +68,7 @@ export default defineUserConfig({
   alias: {
     "ahooks-for-vue": lib,
     "@": alias,
+    // vue: "vue-demi",
     // aliasApi
   },
   markdown: {

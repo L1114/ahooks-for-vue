@@ -1,14 +1,14 @@
 import throttle from "lodash/throttle";
 import { Plugin } from "../type";
 // import type Fetch from "./Fetch";
-import type { ThrottleSettings } from "lodash";
+import type { ThrottleSettings, DebouncedFunc } from "lodash";
 
 const useThrottlePlugin: Plugin<any, any[]> = (
   fetchInstance,
   { throttleWait, throttleLeading, throttleTrailing }
 ) => {
   const options: ThrottleSettings = {};
-  let runAsyncThrottle: any = null;
+  let runAsyncThrottle: DebouncedFunc<any>;
   if (throttleLeading !== undefined) {
     options.leading = throttleLeading;
   }

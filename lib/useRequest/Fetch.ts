@@ -1,4 +1,4 @@
-import { FetchState, Service, Options, Subscribe } from "./type";
+import { FetchState, Service, Options, Subscribe, PluginReturn } from "./type";
 import { reactive } from "vue-demi";
 
 export default class Fetch<TData, TParams extends any[]> {
@@ -9,6 +9,7 @@ export default class Fetch<TData, TParams extends any[]> {
     error: undefined,
     params: undefined,
   });
+  pluginImpls: PluginReturn<TData, TParams>[] = [];
 
   constructor(
     public serviceRef: Service<TData, TParams>,
@@ -18,10 +19,18 @@ export default class Fetch<TData, TParams extends any[]> {
   ) {
     this.options = options || {};
   }
-  lifecycleHook(hookName: string, ...rest: any): void {
-    const hook = (this.options &&
-      this.options[hookName as keyof typeof this.options]) as Function;
+  fetchLifecycleHook(hookName: keyof typeof this.options, ...rest: any) {
+    const hook = (this.options && this.options[hookName]) as Function;
     hook && hook(...rest);
+  }
+  pluginsLifecycleHook(
+    hookName: keyof PluginReturn<TData, TParams>,
+    ...rest: any[]
+  ) {
+    const r = this.pluginImpls
+      .map((i) => (i[hookName] as Function)?.(...rest))
+      .filter(Boolean);
+    return Object.assign({}, ...r);
   }
 
   run(...params: TParams) {
@@ -34,10 +43,13 @@ export default class Fetch<TData, TParams extends any[]> {
   async runAsync(...params: TParams): Promise<TData> {
     this.count++;
     const currentCount = this.count;
-
+    const { stopNow = false } = this.pluginsLifecycleHook("onBefore", params);
+    if (stopNow) {
+      return new Promise(() => {});
+    }
     try {
       this.state.params = params;
-      this.lifecycleHook("onBefore", params);
+      this.fetchLifecycleHook("onBefore", params);
       this.state.loading = true;
       const res = await this.serviceRef(...params);
       if (currentCount !== this.count) {
@@ -46,16 +58,16 @@ export default class Fetch<TData, TParams extends any[]> {
       this.state.data = res;
       this.state.error = undefined;
       this.state.loading = false;
-      this.lifecycleHook("onSuccess", params, res);
-      this.lifecycleHook("onFinally", params, res, undefined);
+      this.fetchLifecycleHook("onSuccess", params, res);
+      this.fetchLifecycleHook("onFinally", params, res, undefined);
 
       return res;
     } catch (error: any) {
       if (currentCount !== this.count) {
         return new Promise(() => {});
       }
-      this.lifecycleHook("onError", params, undefined, error);
-      this.lifecycleHook("onFinally", params, undefined, error);
+      this.fetchLifecycleHook("onError", params, undefined, error);
+      this.fetchLifecycleHook("onFinally", params, undefined, error);
       this.state.loading = false;
       this.state.error = error;
       throw error;

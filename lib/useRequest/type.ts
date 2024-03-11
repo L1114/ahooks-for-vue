@@ -1,4 +1,6 @@
 import type Fetch from "./Fetch";
+import { Ref } from "vue";
+
 // export type Service<TData, TParams extends any[]> = (...args: TParams) => Promise<TData>;
 
 export type Service<TData, TParams extends any[]> = (
@@ -63,9 +65,7 @@ export interface Options<TData, TParams extends any[]> {
   retryInterval?: number;
 
   // ready
-  ready?: boolean;
-
-  // [key: string]: any;
+  ready?: Ref<boolean>;
 }
 
 export type Subscribe = () => void;

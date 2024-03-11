@@ -1,13 +1,13 @@
 import debounce from "lodash/debounce";
 import { Plugin } from "../type";
 // import type Fetch from "./Fetch";
-import type { DebounceSettings } from "lodash";
+import type { DebounceSettings, DebouncedFunc, Function } from "lodash";
 
 const useDebouncePlugin: Plugin<any, any[]> = (
   fetchInstance,
   { debounceWait, debounceLeading, debounceTrailing, debounceMaxWait }
 ) => {
-  let runAsyncDebounce: any = null;
+  let runAsyncDebounce: DebouncedFunc<any>;
   // debugger;
   const options: DebounceSettings = {};
 
@@ -24,7 +24,7 @@ const useDebouncePlugin: Plugin<any, any[]> = (
   if (debounceWait !== undefined && debounceWait > 0) {
     const originRunAsync = fetchInstance.runAsync.bind(fetchInstance);
     runAsyncDebounce = debounce(
-      (cb) => {
+      (cb: () => Promise<any>) => {
         cb();
       },
       debounceWait,
