@@ -7,7 +7,7 @@ export default class Fetch<TData, TParams extends any[]> {
     loading: false,
     data: undefined,
     error: undefined,
-    params: [],
+    params: undefined,
   });
 
   constructor(
@@ -16,29 +16,29 @@ export default class Fetch<TData, TParams extends any[]> {
     public subscribe: Subscribe,
     public initState: any[] // public initState: Partial<FetchState<TData, TParams>>
   ) {
-    // this.state = {
-    //   ...this.state,
-    //   loading: !options.manual,
-    //   ...initState,
-    // };
-    // this.state.data = undefined;
-    // this.state.error = undefined;
-    // this.state.loading = false;
+    this.options = options || {};
   }
-  run(...params: TParams | []) {
+  lifecycleHook(hookName: string, ...rest: any): void {
+    const hook = (this.options &&
+      this.options[hookName as keyof typeof this.options]) as Function;
+    hook && hook(...rest);
+  }
+
+  run(...params: TParams) {
     this.runAsync(...params).catch((error) => {
       if (!this.options.onError) {
         console.error(error);
       }
     });
   }
-  async runAsync(...params: TParams | []): Promise<TData> {
+  async runAsync(...params: TParams): Promise<TData> {
     this.count++;
     const currentCount = this.count;
 
     try {
-      this.state.loading = true;
       this.state.params = params;
+      this.lifecycleHook("onBefore", params);
+      this.state.loading = true;
       const res = await this.serviceRef(...params);
       if (currentCount !== this.count) {
         return new Promise(() => {});
@@ -46,11 +46,16 @@ export default class Fetch<TData, TParams extends any[]> {
       this.state.data = res;
       this.state.error = undefined;
       this.state.loading = false;
+      this.lifecycleHook("onSuccess", params, res);
+      this.lifecycleHook("onFinally", params, res, undefined);
+
       return res;
     } catch (error: any) {
       if (currentCount !== this.count) {
         return new Promise(() => {});
       }
+      this.lifecycleHook("onError", params, undefined, error);
+      this.lifecycleHook("onFinally", params, undefined, error);
       this.state.loading = false;
       this.state.error = error;
       throw error;
@@ -68,9 +73,11 @@ export default class Fetch<TData, TParams extends any[]> {
   }
 
   refresh() {
+    // @ts-ignore
     this.run(...(this.state.params || []));
   }
   refreshAsync() {
+    // @ts-ignore
     this.runAsync(...(this.state.params || []));
   }
 }

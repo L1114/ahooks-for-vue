@@ -2,7 +2,7 @@ import { defineClientConfig } from "@vuepress/client";
 const modules1 = import.meta.glob("./components/**/*.vue");
 const modules2 = import.meta.glob("../pages/**/*.vue");
 const modules = { ...modules1, ...modules2 };
-console.log("modules: ", modules);
+
 // import Demo from "./components/Demo.vue";
 // console.log("Demo: ", Demo);
 // import "./components/**/*.vue";
@@ -33,7 +33,7 @@ const list = Object.entries(modules)
     return fn();
   })
   .filter(Boolean);
-console.log("list :>> ", list);
+
 export default defineClientConfig({
   enhance({ app, router, siteData }) {
     // console.log("app._context.components", app._context.components);
@@ -60,7 +60,7 @@ export default defineClientConfig({
               name: key,
             }
           );
-          console.log("key, Comp", key, Comp);
+
           app.component(key, Comp);
         } else {
           // console.warn("key, component", key, component);

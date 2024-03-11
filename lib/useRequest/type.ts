@@ -2,14 +2,14 @@ import type Fetch from "./Fetch";
 // export type Service<TData, TParams extends any[]> = (...args: TParams) => Promise<TData>;
 
 export type Service<TData, TParams extends any[]> = (
-  ...args: TParams | []
+  ...args: TParams
 ) => Promise<TData>;
 
 export interface FetchState<TData, TParams extends any[]> {
   loading: boolean;
-  params?: TParams | [];
-  data?: TData | undefined;
-  error?: Error | undefined;
+  params?: TParams;
+  data?: TData;
+  error?: Error;
   // test?: Ref<TData | undefined>;
 }
 
@@ -104,7 +104,7 @@ export interface Result<TData, TParams extends any[]> {
   loading: boolean;
   data?: TData;
   error?: Error;
-  params: TParams | [];
+  params: TParams;
   cancel: Fetch<TData, TParams>["cancel"];
   refresh: Fetch<TData, TParams>["refresh"];
   refreshAsync: Fetch<TData, TParams>["refreshAsync"];
