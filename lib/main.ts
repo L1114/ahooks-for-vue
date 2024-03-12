@@ -1,3 +1,4 @@
 import useRequest from "./useRequest/index";
 import useEventListener from "./useEventListener/index";
-export { useRequest, useEventListener };
+import useDocumentVisibility from "./useDocumentVisibility/index";
+export { useRequest, useEventListener, useDocumentVisibility };

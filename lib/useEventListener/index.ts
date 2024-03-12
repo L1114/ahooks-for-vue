@@ -10,12 +10,11 @@ interface Options {
 }
 
 const main: <
-  K extends keyof (
-    | HTMLElementEventMap
-    | ElementEventMap
-    | DocumentEventMap
-    | WindowEventMap
-  )
+  K extends
+    | keyof HTMLElementEventMap
+    | keyof DocumentEventMap
+    | keyof WindowEventMap
+    | keyof ElementEventMap
 >(
   eventName: K,
   handler: Function,
