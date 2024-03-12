@@ -1,2 +1,3 @@
 import useRequest from "./useRequest/index";
-export { useRequest };
+import useEventListener from "./useEventListener/index";
+export { useRequest, useEventListener };

@@ -1,8 +1,3 @@
----
-nav:
-  path: /hooks
----
-
 # useEventListener
 
 优雅的使用 addEventListener。
@@ -11,12 +6,16 @@ nav:
 
 ### 基础用法
 
-<code src="./demo/demo1.tsx" />
-
+<Dom-useEventListener-demo />
+::: details 点击查看代码
+@[code vue](./demo.vue)
+:::
 ### 监听 keydown 事件
 
-<code src="./demo/demo2.tsx" />
-
+<Dom-useEventListener-demo2 />
+::: details 点击查看代码
+@[code vue](./demo2.vue)
+:::
 ## API
 
 ```typescript

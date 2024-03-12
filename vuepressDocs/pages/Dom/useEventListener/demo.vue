@@ -1,24 +1,21 @@
 <script setup>
-import { mockFetch } from "@/api";
-import { useRequest } from "ahooks-for-vue";
-import { ref, watch } from "vue";
-const ready = ref(false);
-
-const { loading, data, run } = useRequest(mockFetch, {
-  ready,
-});
-
-const set = (v) => {
-  ready.value = v;
-};
+import { useEventListener } from "ahooks-for-vue";
+import { ref } from "vue";
+const num = ref(1);
+const domRef = ref(null);
+useEventListener(
+  "click",
+  () => {
+    num.value += 1;
+  },
+  {
+    target: domRef,
+  }
+);
 </script>
 <template>
-  <div>
-    <button @click="() => set(true)">set ready true</button>
-    -
-    <button @click="() => set(false)">set ready false</button>
-    - ready:{{ ready }} <br /><br />
-    data: {{ loading ? "loading..." : data }}
+  <div class="a">
+    <button ref="domRef">click:{{ num }}</button>
   </div>
 </template>
 <style></style>
