@@ -15,3 +15,12 @@ export const mockFetchFast = async (...params) => {
     }, 200);
   });
 };
+
+export const mockFetchError = async (...params) => {
+  console.log("mockFetch params: ", params);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject(Math.random());
+    }, 200);
+  });
+};

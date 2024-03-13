@@ -55,11 +55,14 @@ export default class Fetch<TData, TParams extends any[]> {
       if (currentCount !== this.count) {
         return new Promise(() => {});
       }
+      this.pluginsLifecycleHook("onBefore", params);
       this.state.data = res;
       this.state.error = undefined;
       this.state.loading = false;
       this.fetchLifecycleHook("onSuccess", params, res);
-      this.fetchLifecycleHook("onFinally", params, res, undefined);
+      this.fetchLifecycleHook("onFinally", params, res);
+      this.pluginsLifecycleHook("onSuccess", params, res);
+      this.pluginsLifecycleHook("onFinally", params, res);
 
       return res;
     } catch (error: any) {
@@ -68,6 +71,9 @@ export default class Fetch<TData, TParams extends any[]> {
       }
       this.fetchLifecycleHook("onError", params, undefined, error);
       this.fetchLifecycleHook("onFinally", params, undefined, error);
+      this.pluginsLifecycleHook("onError", params, undefined, error);
+      this.pluginsLifecycleHook("onFinally", params, undefined, error);
+
       this.state.loading = false;
       this.state.error = error;
       throw error;

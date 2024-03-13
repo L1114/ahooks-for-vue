@@ -1,12 +1,12 @@
 <script setup>
-import { mockFetch } from "@/api";
+import { mockFetchFast, mockFetchError } from "@/api";
 import { useRequest } from "ahooks-for-vue";
-import { ref, watch } from "vue";
 
-const { loading, data, cancel, run } = useRequest(mockFetch, {
-  // pollingInterval: 500,
+const { loading, data, cancel, run } = useRequest(mockFetchFast, {
+  pollingInterval: 3000,
+  // pollingErrorRetryCount: 10,
+  // pollingWhenHidden: false,
 });
-console.log("loading, data, cancel, run :>> ", loading, data, cancel, run);
 const set = (v) => {
   v ? run() : cancel();
 };

@@ -49,7 +49,7 @@ const { data, run, cancel } = useRequest(getUsername, {
 
 ## 备注
 
-- `options.pollingInterval`、`options.pollingWhenHidden` 支持动态变化。
+- ~~`options.pollingInterval`、`options.pollingWhenHidden` 支持动态变化。~~
 - 如果设置 `options.manual = true`，则初始化不会启动轮询，需要通过 `run/runAsync` 触发开始。
 - 如果设置 `pollingInterval` 由 `0` 变成 `大于 0` 的值，不会启动轮询，需要通过 `run/runAsync` 触发开始。
 - 轮询原理是在每次请求完成后，等待 `pollingInterval` 时间，发起下一次请求。

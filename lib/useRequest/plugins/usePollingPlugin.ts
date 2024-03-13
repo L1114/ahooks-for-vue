@@ -1,31 +1,46 @@
 import { Plugin } from "../type";
+import useDocumentVisibility from "../../useDocumentVisibility";
+import { onUnmounted } from "vue-demi";
 
-import { onMounted, onUnmounted, watch, Ref, isRef, ref } from "vue-demi";
 const usePollingPlugin: Plugin<any, any[]> = (
   fetchInstance,
-  { pollingInterval, pollingWhenHidden, pollingErrorRetryCount = -1 }
+  { pollingInterval, pollingWhenHidden = true, pollingErrorRetryCount = -1 }
 ) => {
-  debugger;
   if (!pollingInterval || pollingInterval <= 0) {
     return {};
   }
+  let disabledPolling = false;
   let errorCount = 0;
   let timer: ReturnType<typeof setTimeout>;
-  const stopPolling = () => clearTimeout(timer);
+  const stopPolling = (v?: boolean) => {
+    v && (disabledPolling = v);
+    clearTimeout(timer);
+  };
   const originRun = fetchInstance.run.bind(fetchInstance);
+  if (!pollingWhenHidden) {
+    useDocumentVisibility((v) => {
+      if (v === "visible" && !disabledPolling) {
+        return startPolling(fetchInstance.state.params as []);
+      }
+      if (v === "hidden") {
+        return stopPolling();
+      }
+    });
+  }
 
   fetchInstance.run = (...params) => {
-    stopPolling();
     originRun(...params);
-    timer = setTimeout(() => {
-      originRun(...params);
-    }, pollingInterval);
+    startPolling(params);
   };
 
-  // const startPolling = () => {
-  //   stopPolling();
-  // };
-  // startPolling();
+  const startPolling = (params: any[]) => {
+    stopPolling();
+    disabledPolling = false;
+    timer = setTimeout(() => {
+      fetchInstance.run(...(params || []));
+    }, pollingInterval);
+  };
+  onUnmounted(() => stopPolling(true));
   return {
     // onBefore() {},
     onError: () => {
@@ -35,14 +50,14 @@ const usePollingPlugin: Plugin<any, any[]> = (
         pollingErrorRetryCount !== -1 &&
         errorCount >= pollingErrorRetryCount
       ) {
-        stopPolling();
+        stopPolling(true);
       }
     },
     onSuccess: () => {
       errorCount = 0;
     },
     onCancel() {
-      stopPolling();
+      stopPolling(true);
     },
   };
 };
