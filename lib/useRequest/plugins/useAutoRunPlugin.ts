@@ -10,7 +10,7 @@ const useAutoRunPlugin: Plugin<any, any[]> = (
     const _ready = isRef(ready) ? ready.value : !!ready;
     stopNow = !_ready;
     if (!manual && _ready) {
-      fetchInstance.run(...(fetchInstance.state.params || []));
+      fetchInstance.run(...fetchInstance.getRawParams());
     }
   });
   onUnmounted(() => {
@@ -24,7 +24,7 @@ const useAutoRunPlugin: Plugin<any, any[]> = (
     // console.log("fetchInstance :>> ", fetchInstance);
     // console.log("newV, oldV: ", newV, oldV);
     if (!manual && newV) {
-      fetchInstance.run(...(fetchInstance.state.params || []));
+      fetchInstance.run(...fetchInstance.getRawParams());
     }
   });
   return {

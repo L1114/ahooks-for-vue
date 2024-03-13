@@ -1,5 +1,5 @@
 import { FetchState, Service, Options, Subscribe, PluginReturn } from "./type";
-import { reactive } from "vue-demi";
+import { reactive, toRaw } from "vue-demi";
 
 export default class Fetch<TData, TParams extends any[]> {
   count: number = 0;
@@ -18,6 +18,9 @@ export default class Fetch<TData, TParams extends any[]> {
     public initState: any[] // public initState: Partial<FetchState<TData, TParams>>
   ) {
     this.options = options || {};
+  }
+  getRawParams() {
+    return toRaw(this.state.params) || [];
   }
   fetchLifecycleHook(hookName: keyof typeof this.options, ...rest: any) {
     const hook = (this.options && this.options[hookName]) as Function;
@@ -93,10 +96,10 @@ export default class Fetch<TData, TParams extends any[]> {
 
   refresh() {
     // @ts-ignore
-    this.run(...(this.state.params || []));
+    this.run(...getRawParams());
   }
   refreshAsync() {
     // @ts-ignore
-    this.runAsync(...(this.state.params || []));
+    this.runAsync(...getRawParams());
   }
 }

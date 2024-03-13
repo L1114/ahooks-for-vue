@@ -4,6 +4,7 @@ import { useRequest } from "ahooks-for-vue";
 
 const { loading, data, cancel, run } = useRequest(mockFetchFast, {
   pollingInterval: 3000,
+  // defaultParams: { },
   // pollingErrorRetryCount: 10,
   // pollingWhenHidden: false,
 });

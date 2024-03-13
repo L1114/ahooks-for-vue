@@ -20,7 +20,7 @@ const usePollingPlugin: Plugin<any, any[]> = (
   if (!pollingWhenHidden) {
     useDocumentVisibility((v) => {
       if (v === "visible" && !disabledPolling) {
-        return startPolling(fetchInstance.state.params as []);
+        return startPolling(fetchInstance.getRawParams());
       }
       if (v === "hidden") {
         return stopPolling();
@@ -28,7 +28,8 @@ const usePollingPlugin: Plugin<any, any[]> = (
     });
   }
 
-  fetchInstance.run = (...params) => {
+  fetchInstance.run = (..._params) => {
+    const params = _params?.length ? _params : fetchInstance.getRawParams();
     originRun(...params);
     startPolling(params);
   };
@@ -38,6 +39,7 @@ const usePollingPlugin: Plugin<any, any[]> = (
     disabledPolling = false;
     timer = setTimeout(() => {
       fetchInstance.run(...(params || []));
+      // fetchInstance.refresh()
     }, pollingInterval);
   };
   onUnmounted(() => stopPolling(true));
