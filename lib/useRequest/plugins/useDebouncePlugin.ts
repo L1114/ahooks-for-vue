@@ -1,7 +1,7 @@
 import debounce from "lodash/debounce";
 import { Plugin } from "../type";
 // import type Fetch from "./Fetch";
-import type { DebounceSettings, DebouncedFunc, Function } from "lodash";
+import type { DebounceSettings, DebouncedFunc } from "lodash";
 
 const useDebouncePlugin: Plugin<any, any[]> = (
   fetchInstance,

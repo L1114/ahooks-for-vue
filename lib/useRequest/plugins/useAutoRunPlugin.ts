@@ -17,7 +17,7 @@ const useAutoRunPlugin: Plugin<any, any[]> = (
     fetchInstance.cancel();
     stopWatch();
   });
-  const stopWatch = watch(ready as Ref<boolean>, (newV, oldV) => {
+  const stopWatch = watch(ready as Ref<boolean>, (newV) => {
     stopNow = !newV;
     // console.log("stopNow: ", stopNow);
     // console.log("manual :>> ", manual);

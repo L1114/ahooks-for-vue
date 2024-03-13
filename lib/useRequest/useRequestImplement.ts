@@ -1,6 +1,6 @@
 import { Service, Options, Plugin } from "./type";
 import Fetch from "./Fetch";
-import { toRef, toRaw } from "vue-demi";
+import { toRef } from "vue-demi";
 
 const useRequestImplement = <TData, TParams extends any[]>(
   service: Service<TData, TParams>,
