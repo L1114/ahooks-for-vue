@@ -22,7 +22,7 @@ export default class Fetch<TData, TParams extends any[]> {
   getRawParams() {
     return toRaw(this.state.params) || [];
   }
-  fetchLifecycleHook(hookName: keyof typeof this.options, ...rest: any) {
+  userOptionsHook(hookName: keyof typeof this.options, ...rest: any) {
     const hook = (this.options && this.options[hookName]) as Function;
     hook && hook(...rest);
   }
@@ -52,7 +52,7 @@ export default class Fetch<TData, TParams extends any[]> {
     }
     try {
       this.state.params = params;
-      this.fetchLifecycleHook("onBefore", params);
+      this.userOptionsHook("onBefore", params);
       this.state.loading = true;
       const res = await this.serviceRef(...params);
       if (currentCount !== this.count) {
@@ -62,8 +62,8 @@ export default class Fetch<TData, TParams extends any[]> {
       this.state.data = res;
       this.state.error = undefined;
       this.state.loading = false;
-      this.fetchLifecycleHook("onSuccess", params, res);
-      this.fetchLifecycleHook("onFinally", params, res);
+      this.userOptionsHook("onSuccess", params, res);
+      this.userOptionsHook("onFinally", params, res);
       this.pluginsLifecycleHook("onSuccess", params, res);
       this.pluginsLifecycleHook("onFinally", params, res);
 
@@ -72,13 +72,14 @@ export default class Fetch<TData, TParams extends any[]> {
       if (currentCount !== this.count) {
         return new Promise(() => {});
       }
-      this.fetchLifecycleHook("onError", params, undefined, error);
-      this.fetchLifecycleHook("onFinally", params, undefined, error);
+      this.state.loading = false;
+      this.state.error = error;
+
+      this.userOptionsHook("onError", params, undefined, error);
+      this.userOptionsHook("onFinally", params, undefined, error);
       this.pluginsLifecycleHook("onError", params, undefined, error);
       this.pluginsLifecycleHook("onFinally", params, undefined, error);
 
-      this.state.loading = false;
-      this.state.error = error;
       throw error;
     }
   }
@@ -100,6 +101,6 @@ export default class Fetch<TData, TParams extends any[]> {
   }
   refreshAsync() {
     // @ts-ignore
-    this.runAsync(...getRawParams());
+    return this.runAsync(...getRawParams());
   }
 }
