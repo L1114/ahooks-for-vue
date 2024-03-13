@@ -2,22 +2,20 @@
 import { mockFetch } from "@/api";
 import { useRequest } from "ahooks-for-vue";
 import { ref, watch } from "vue";
-const ready = ref(false);
 
-const { loading, data, run } = useRequest(mockFetch, {
-  ready,
+const { loading, data, cancel, run } = useRequest(mockFetch, {
+  // pollingInterval: 500,
 });
-
+console.log("loading, data, cancel, run :>> ", loading, data, cancel, run);
 const set = (v) => {
-  ready.value = v;
+  v ? run() : cancel();
 };
 </script>
 <template>
   <div>
-    <button @click="() => set(true)">set ready true</button>
+    <button @click="() => set(true)">start</button>
     -
-    <button @click="() => set(false)">set ready false</button>
-    - ready:{{ ready }} <br /><br />
+    <button @click="() => set(false)">stop</button>
     data: {{ loading ? "loading..." : data }}
   </div>
 </template>

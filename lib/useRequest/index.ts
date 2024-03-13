@@ -2,7 +2,7 @@ import { Service, Options, Plugin } from "./type";
 import useRequestImplement from "./useRequestImplement";
 import useThrottlePlugin from "./plugins/useThrottlePlugin";
 import useDebouncePlugin from "./plugins/useDebouncePlugin";
-import useAutoRunPlugin from "./plugins/useAutoRunPlugin";
+import usePollingPlugin from "./plugins/usePollingPlugin";
 
 const useRequest = <TData, TParams extends any[]>(
   service: Service<TData, TParams>,
@@ -13,7 +13,7 @@ const useRequest = <TData, TParams extends any[]>(
     ...(plugins || []),
     useThrottlePlugin,
     useDebouncePlugin,
-    useAutoRunPlugin,
+    // usePollingPlugin,
   ] as Plugin<TData, TParams>[]);
 };
 
