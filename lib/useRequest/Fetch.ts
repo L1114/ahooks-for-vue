@@ -18,6 +18,9 @@ export default class Fetch<TData, TParams extends any[]> {
     public initState: any[] // public initState: Partial<FetchState<TData, TParams>>
   ) {
     this.options = options || {};
+    let params = options.defaultParams || [];
+    // @ts-ignore
+    this.state.params = Array.isArray(params) ? params : [params];
   }
   getRawParams() {
     return toRaw(this.state.params) || [];

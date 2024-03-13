@@ -7,13 +7,7 @@ const useRequestImplement = <TData, TParams extends any[]>(
   options: Options<TData, TParams> = {},
   plugins: Plugin<TData, TParams>[] = []
 ) => {
-  const fetchInstance = new Fetch(service, options, () => {}, plugins);
-
-  fetchInstance.options = options;
-  let params = options.defaultParams || [];
-  params = Array.isArray(params) ? params : [params];
-  //@ts-ignore
-  fetchInstance.state.params = params;
+  const fetchInstance = new Fetch(service, options, () => {}, []);
   fetchInstance.pluginImpls = plugins.map((p) => p(fetchInstance, options));
 
   return {
