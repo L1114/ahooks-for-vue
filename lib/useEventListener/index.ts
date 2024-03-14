@@ -1,4 +1,4 @@
-import { onUnmounted, Ref } from "vue-demi";
+import { onUnmounted, Ref, watch, isRef } from "vue-demi";
 import { getTargetElement } from "../utils/index";
 
 type DomTarget = HTMLElement | Window | Document | Element;
@@ -25,24 +25,40 @@ const main: <
     return handler(event);
   };
   // @ts-ignore
-  let target: DomTarget = getTargetElement(options?.target);
+  let target: DomTarget | undefined = getTargetElement(options?.target);
 
-  if (!target?.addEventListener) {
-    return;
-  }
-  target.addEventListener(eventName, eventListener, {
-    capture: options.capture,
-    once: options.once,
-    passive: options.passive,
-  });
-
-  onUnmounted(() => {
+  const addEventListener = () => {
+    console.log("addEventListener: ", target);
+    if (!target?.addEventListener) {
+      return;
+    }
+    removeEventListener();
+    target.addEventListener(eventName, eventListener, {
+      capture: options.capture,
+      once: options.once,
+      passive: options.passive,
+    });
+  };
+  const removeEventListener = () => {
+    console.log("removeEventListener: ", target);
     if (!target?.removeEventListener) {
       return;
     }
     target.removeEventListener(eventName, eventListener, {
       capture: options.capture,
     });
+  };
+  addEventListener();
+  onUnmounted(() => {
+    removeEventListener();
   });
+
+  if (isRef(options?.target)) {
+    watch(options?.target, (v) => {
+      removeEventListener();
+      target = v;
+      addEventListener();
+    });
+  }
 };
 export default main;

@@ -1,4 +1,4 @@
-import { Ref } from "vue-demi";
+import { Ref, isRef } from "vue-demi";
 
 const isBrowser = !!(
   typeof window !== "undefined" &&
@@ -12,7 +12,14 @@ const getTargetElement = (target: OptionsTarget) => {
   if (!isBrowser) {
     return undefined;
   }
-  let targetElement = typeof target === "function" ? target() : target;
+  let targetElement = target;
+  if (typeof targetElement === "function") {
+    targetElement = targetElement();
+  }
+  if (isRef(targetElement)) {
+    targetElement = targetElement.value;
+  }
+
   return targetElement || window;
 };
 export { isBrowser, getTargetElement };
