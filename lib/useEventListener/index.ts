@@ -9,7 +9,10 @@ interface Options {
   once?: boolean;
   passive?: boolean;
 }
-
+interface Result {
+  add: () => void;
+  remove: () => void;
+}
 const main: <
   K extends
     | keyof HTMLElementEventMap
@@ -20,27 +23,28 @@ const main: <
   eventName: K,
   handler: Function,
   options?: Options
-) => void = (eventName, handler, options = {}) => {
+) => Result = (eventName, handler, options = {}) => {
   const eventListener = (event: Event) => {
     return handler(event);
   };
+  let disabledListener = false;
   // @ts-ignore
   let target: DomTarget | undefined = getTargetElement(options?.target);
 
-  const addEventListener = () => {
-    console.log("addEventListener: ", target);
-    if (!target?.addEventListener) {
+  const addEventListener = (before?: Function) => {
+    before && before();
+    removeEventListener();
+    if (!target?.addEventListener || disabledListener) {
       return;
     }
-    removeEventListener();
     target.addEventListener(eventName, eventListener, {
       capture: options.capture,
       once: options.once,
       passive: options.passive,
     });
   };
-  const removeEventListener = () => {
-    console.log("removeEventListener: ", target);
+  const removeEventListener = (before?: Function) => {
+    before && before();
     if (!target?.removeEventListener) {
       return;
     }
@@ -60,5 +64,9 @@ const main: <
       addEventListener();
     });
   }
+  return {
+    remove: () => removeEventListener(() => (disabledListener = true)),
+    add: () => addEventListener(() => (disabledListener = false)),
+  };
 };
 export default main;
