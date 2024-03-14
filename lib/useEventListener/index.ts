@@ -1,7 +1,8 @@
-import { onMounted, onUnmounted, Ref } from "vue-demi";
+import { onUnmounted, Ref } from "vue-demi";
+import { getTargetElement } from "../utils/index";
 
 type DomTarget = HTMLElement | Window | Document | Element;
-type OptionsTarget = DomTarget | (() => Element) | Ref<DomTarget>;
+type OptionsTarget = DomTarget | (() => DomTarget) | Ref<DomTarget>;
 interface Options {
   target?: OptionsTarget;
   capture?: boolean;
@@ -18,28 +19,23 @@ const main: <
 >(
   eventName: K,
   handler: Function,
-  options: Options
+  options?: Options
 ) => void = (eventName, handler, options = {}) => {
   const eventListener = (event: Event) => {
     return handler(event);
   };
-  let target: DomTarget;
+  // @ts-ignore
+  let target: DomTarget = getTargetElement(options?.target);
 
-  onMounted(() => {
-    if (typeof options.target === "function") {
-      // @ts-ignore
-      target = options.target();
-    }
-    target = target || window;
-    if (!target?.addEventListener) {
-      return;
-    }
-    target.addEventListener(eventName, eventListener, {
-      capture: options.capture,
-      once: options.once,
-      passive: options.passive,
-    });
+  if (!target?.addEventListener) {
+    return;
+  }
+  target.addEventListener(eventName, eventListener, {
+    capture: options.capture,
+    once: options.once,
+    passive: options.passive,
   });
+
   onUnmounted(() => {
     if (!target?.removeEventListener) {
       return;
