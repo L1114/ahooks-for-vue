@@ -26,7 +26,8 @@
     "require": "./packages/ahooks-for-vue.umd.js"
   },
   "scripts": {
-    "build": "tsc --build && vite build && npm run babel && npm run docs:build",
+    "build": "npm run lib-build && npm run babel && npm run docs:build",
+    "lib-build": "tsc --build && vite build",
     "dev": "vuepress dev vuepressDocs",
     "docs:build": "vuepress build vuepressDocs",
     "babel": "babel packages --out-dir packages",
