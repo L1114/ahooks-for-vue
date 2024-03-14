@@ -23,14 +23,14 @@ const main: <
   const eventListener = (event: Event) => {
     return handler(event);
   };
-  let target = window;
-  if (typeof options.target === "function") {
-    // @ts-ignore
-    target = options.target();
-  }
-  target = target || window;
+  let target: DomTarget;
 
   onMounted(() => {
+    if (typeof options.target === "function") {
+      // @ts-ignore
+      target = options.target();
+    }
+    target = target || window;
     if (!target?.addEventListener) {
       return;
     }
