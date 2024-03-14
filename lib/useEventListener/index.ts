@@ -21,7 +21,7 @@ const main: <
     | keyof ElementEventMap
 >(
   eventName: K,
-  handler: Function,
+  handler: (e: Event) => void,
   options?: Options
 ) => Result = (eventName, handler, options = {}) => {
   const eventListener = (event: Event) => {
