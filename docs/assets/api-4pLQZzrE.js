@@ -1,0 +1,1 @@
+const c=async(...e)=>(console.log("mockFetch params: ",e),new Promise((o,t)=>{setTimeout(()=>{o(Math.random())},2e3)})),s=async(...e)=>(console.log("mockFetch params: ",e),new Promise((o,t)=>{setTimeout(()=>{o(Math.random())},200)}));export{s as a,c as m};

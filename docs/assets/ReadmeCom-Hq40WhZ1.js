@@ -1,4 +1,4 @@
-import{g as qr,a as Er}from"./commonjsHelpers-1J56E-h6.js";import{_ as Dr,o as Sr,c as Fr,u as Lr}from"./app-MDcXVWpp.js";const Tr=`Vue Hooks 库
+import{g as qr,a as Er}from"./commonjsHelpers-1J56E-h6.js";import{_ as Dr,o as Sr,c as Fr,u as Lr}from"./app-sV-t5tpv.js";const Tr=`Vue Hooks 库
 
 ## 📚 文档
 
