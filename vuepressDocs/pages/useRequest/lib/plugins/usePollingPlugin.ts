@@ -1,5 +1,5 @@
 import { Plugin } from "../type";
-import useDocumentVisibility from "../../useDocumentVisibility";
+import useDocumentVisibility from "../../../Dom/useDocumentVisibility/lib/index";
 import { onUnmounted } from "vue-demi";
 
 const usePollingPlugin: Plugin<any, any[]> = (

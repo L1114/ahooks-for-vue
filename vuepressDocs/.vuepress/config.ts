@@ -13,7 +13,7 @@ const __dirname = getDirname(import.meta.url);
 const alias = path.resolve(__dirname, "../pages");
 // const aliasApi = path.resolve(__dirname, "../pages/api.js");
 
-const lib = path.resolve(__dirname, "../../lib/main.ts");
+const lib = path.resolve(__dirname, "../pages/main.ts");
 const logo = "./logo.png";
 // @ts-ignore
 // const routes = import.meta.glob("../pages/**/*.readme.md");
@@ -39,7 +39,7 @@ files.forEach((ele) => {
   }
 });
 const sidebar = Object.values(routesObject);
-console.log("sidebar: ", sidebar);
+// console.log("sidebar: ", sidebar);
 
 export default defineUserConfig({
   lang: "zh-CN",

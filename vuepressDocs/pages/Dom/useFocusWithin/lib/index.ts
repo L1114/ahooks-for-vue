@@ -1,6 +1,6 @@
 import { Ref, watch, ref } from "vue-demi";
-import { getTargetElement } from "../utils/index";
-import useEventListener from "../useEventListener/index";
+import { getTargetElement } from "../../../utils/index";
+import useEventListener from "../../useEventListener/lib/index";
 
 type DomTarget = HTMLElement | Window | Document | Element;
 type OptionsTarget = DomTarget | (() => DomTarget) | Ref<DomTarget>;

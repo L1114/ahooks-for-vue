@@ -1,5 +1,5 @@
 import { ref, Ref } from "vue-demi";
-import useEventListener from "../useEventListener/index";
+import useEventListener from "../../../Dom/useEventListener/lib/index";
 type VisibilityState = "visible" | "hidden" | "prerender" | undefined;
 type Callback = (v: VisibilityState) => void;
 export default (cb: Callback) => {

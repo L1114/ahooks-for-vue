@@ -26,7 +26,7 @@ export default defineConfig({
     // target: "es2015",
     minify: true,
     lib: {
-      entry: path.resolve("./lib/main.ts"),
+      entry: path.resolve("./vuepressDocs/pages/main.ts"),
       name: "ahooks-for-vue",
     },
     outDir: "packages",

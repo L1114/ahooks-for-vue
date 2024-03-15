@@ -1,5 +1,5 @@
 import { onUnmounted, Ref, watch, isRef } from "vue-demi";
-import { getTargetElement } from "../utils/index";
+import { getTargetElement } from "../../../utils/index";
 
 type DomTarget = HTMLElement | Window | Document | Element;
 type OptionsTarget = DomTarget | (() => DomTarget) | Ref<DomTarget>;
