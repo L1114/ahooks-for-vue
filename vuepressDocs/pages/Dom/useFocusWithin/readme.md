@@ -7,6 +7,9 @@
 ### 基础用法
 
 <Dom-useFocusWithin-demo />
+::: details 点击查看代码
+@[code vue](./demo.vue)
+:::
 
 ### 传入 DOM 元素
 
@@ -40,5 +43,5 @@ const isFocusWithin = useFocusWithin(target, {
 | 参数          | 说明               | 类型           |
 | ------------- | ------------------ | -------------- |
 | isFocusWithin | 焦点是否在当前区域 | `Ref<boolean>` |
-| `add`         | 重新开始监听函数   | `() => void`   |
-| `remove`      | 移除监听函数       | `() => void`   |
+| `restart`     | 重新开始监听函数   | `() => void`   |
+| `stop`        | 移除监听函数       | `() => void`   |

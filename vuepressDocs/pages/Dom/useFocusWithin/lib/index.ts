@@ -27,6 +27,7 @@ const main: UseFocusWithin = (t, options = {}) => {
   let removeListenFocusout = () => {};
   /**focusout 移除监听函数集合*/
   let stop = () => {
+    isFocusWithin.value = false;
     removeListenFocusin();
     removeListenFocusout();
   };
@@ -36,9 +37,11 @@ const main: UseFocusWithin = (t, options = {}) => {
     return useEventListener(
       "focusin",
       (v) => {
-        isFocusWithin.value = true;
-        options?.onFocus?.(v);
-        options?.onChange?.(true);
+        if (!isFocusWithin.value) {
+          isFocusWithin.value = true;
+          options?.onFocus?.(v);
+          options?.onChange?.(true);
+        }
       },
       {
         target: targetElement,
@@ -50,9 +53,11 @@ const main: UseFocusWithin = (t, options = {}) => {
     return useEventListener(
       "focusout",
       (v) => {
-        isFocusWithin.value = false;
-        options?.onBlur?.(v);
-        options?.onChange?.(true);
+        if (isFocusWithin.value) {
+          isFocusWithin.value = false;
+          options?.onBlur?.(v);
+          options?.onChange?.(true);
+        }
       },
       {
         target: targetElement,

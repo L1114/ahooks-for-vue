@@ -21,9 +21,13 @@ const { isFocusWithin, stop, restart } = useFocusWithin(domRef);
       </label>
     </div>
     <p>isFocusWithin: {{ isFocusWithin }}</p>
-    <button @click="restart">重新开始监听</button>-<button @click="stop">
-      移除监听
-    </button>
+    <button @click="restart">重新开始监听</button>
+    -
+    <button @click="stop">移除监听</button>
   </div>
 </template>
-<style></style>
+<style>
+* {
+  user-select: none;
+}
+</style>
