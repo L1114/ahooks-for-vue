@@ -10,6 +10,7 @@ export default class Fetch<TData, TParams extends any[]> {
     params: undefined,
   });
   pluginImpls: PluginReturn<TData, TParams>[] = [];
+  lastFetchTime: number = 0;
 
   constructor(
     public serviceRef: Service<TData, TParams>,
@@ -57,6 +58,7 @@ export default class Fetch<TData, TParams extends any[]> {
       this.state.params = params;
       this.userOptionsHook("onBefore", params);
       this.state.loading = true;
+      this.lastFetchTime = Date.now();
       const res = await this.serviceRef(...params);
       if (currentCount !== this.count) {
         return new Promise(() => {});
@@ -65,6 +67,7 @@ export default class Fetch<TData, TParams extends any[]> {
       this.state.data = res;
       this.state.error = undefined;
       this.state.loading = false;
+
       this.userOptionsHook("onSuccess", params, res);
       this.userOptionsHook("onFinally", params, res);
       this.pluginsLifecycleHook("onSuccess", params, res);
@@ -100,10 +103,10 @@ export default class Fetch<TData, TParams extends any[]> {
 
   refresh() {
     // @ts-ignore
-    this.run(...getRawParams());
+    this.run(...this.getRawParams());
   }
   refreshAsync() {
     // @ts-ignore
-    return this.runAsync(...getRawParams());
+    return this.runAsync(...this.getRawParams());
   }
 }

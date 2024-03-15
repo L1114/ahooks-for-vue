@@ -13,6 +13,7 @@ const { isFocusWithin, stop, restart } = useFocusWithin(domRef);
         padding: '32px',
         backgroundColor: isFocusWithin ? 'red' : '',
         border: '1px solid gray',
+        userSelect: 'none',
       }"
     >
       <label :style="{ display: 'block' }"> First Name: <input /> </label><br />
@@ -26,8 +27,4 @@ const { isFocusWithin, stop, restart } = useFocusWithin(domRef);
     <button @click="stop">移除监听</button>
   </div>
 </template>
-<style>
-* {
-  user-select: none;
-}
-</style>
+<style></style>

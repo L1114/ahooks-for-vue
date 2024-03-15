@@ -7,10 +7,19 @@ type OptionsTarget =
   | DomTarget
   | Ref<DomTarget>
   | (() => DomTarget | Ref<DomTarget>);
+
+type BrowserEvent =
+  | keyof HTMLElementEventMap
+  | keyof DocumentEventMap
+  | keyof WindowEventMap
+  | keyof ElementEventMap;
+
 interface Options {
   onFocus?: (e: FocusEvent | Event) => void;
   onBlur?: (e: FocusEvent | Event) => void;
   onChange?: (isFocusWithin: boolean) => void;
+  focusin?: BrowserEvent;
+  focusout?: BrowserEvent;
 }
 interface Result {
   restart: () => void;
@@ -27,15 +36,15 @@ const main: UseFocusWithin = (t, options = {}) => {
   let removeListenFocusout = () => {};
   /**focusout 移除监听函数集合*/
   let stop = () => {
-    isFocusWithin.value = false;
     removeListenFocusin();
     removeListenFocusout();
   };
-
+  const focusin = options?.focusin || "focusin";
+  const focusout = options?.focusout || "focusout";
   /**focusin 监听函数 */
   const listenFocusin = (targetElement: any) => {
     return useEventListener(
-      "focusin",
+      focusin,
       (v) => {
         if (!isFocusWithin.value) {
           isFocusWithin.value = true;
@@ -51,7 +60,7 @@ const main: UseFocusWithin = (t, options = {}) => {
   /**focusout 监听函数 */
   const listenFocusout = (targetElement: any) => {
     return useEventListener(
-      "focusout",
+      focusout,
       (v) => {
         if (isFocusWithin.value) {
           isFocusWithin.value = false;
@@ -67,6 +76,7 @@ const main: UseFocusWithin = (t, options = {}) => {
   /**监听函数集合*/
   let restart = () => {
     stop();
+    isFocusWithin.value = false;
     removeListenFocusin = listenFocusin(target).stop;
     removeListenFocusout = listenFocusout(target).stop;
   };

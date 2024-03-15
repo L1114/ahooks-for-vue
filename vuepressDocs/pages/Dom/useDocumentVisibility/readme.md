@@ -14,17 +14,19 @@
 ## API
 
 ```typescript
-const documentVisibility = useDocumentVisibility();
+const { documentVisibility } = useDocumentVisibility();
 ```
 
 ### Result
 
-| 参数               | 说明                           | 类型                                               |
-| ------------------ | ------------------------------ | -------------------------------------------------- |
-| documentVisibility | 判断 document 是否处于可见状态 | `visible`\| `hidden` \| `prerender` \| `undefined` |
+| 参数               | 说明                           | 类型                                                    |
+| ------------------ | ------------------------------ | ------------------------------------------------------- |
+| documentVisibility | 判断 document 是否处于可见状态 | Ref<`visible`\| `hidden` \| `prerender`> \| `undefined` |
 
 ### Params
 
-| 参数     | 说明     | 类型                            |
-| -------- | -------- | ------------------------------- |
-| callBack | 回调函数 | ( documentVisibility ) => void) |
+| 参数      | 说明             | 类型                            |
+| --------- | ---------------- | ------------------------------- |
+| callBack  | 回调函数         | ( documentVisibility ) => void) |
+| `restart` | 重新开始监听函数 | `() => void`                    |
+| `stop`    | 移除监听函数     | `() => void`                    |

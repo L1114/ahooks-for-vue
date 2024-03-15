@@ -82,6 +82,7 @@ export default defineUserConfig({
           "/pages/useRequest/debounce",
           "/pages/useRequest/ready",
           "/pages/useRequest/polling",
+          "/pages/useRequest/useRefreshOnWindowFocus",
         ],
       },
       ...sidebar,

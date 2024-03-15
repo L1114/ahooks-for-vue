@@ -31,4 +31,4 @@ const getTargetElement: (
 
   return targetElement || defaultElement;
 };
-export { isBrowser, getTargetElement };
+export { isBrowser, getTargetElement, refToRaw };

@@ -4,6 +4,7 @@ import useThrottlePlugin from "./plugins/useThrottlePlugin";
 import useDebouncePlugin from "./plugins/useDebouncePlugin";
 import useAutoRunPlugin from "./plugins/useAutoRunPlugin";
 import usePollingPlugin from "./plugins/usePollingPlugin";
+import useRefreshOnWindowFocusPlugin from "./plugins/useRefreshOnWindowFocusPlugin";
 
 const useRequest = <TData, TParams extends any[]>(
   service: Service<TData, TParams>,
@@ -16,6 +17,7 @@ const useRequest = <TData, TParams extends any[]>(
     useDebouncePlugin,
     useAutoRunPlugin,
     usePollingPlugin,
+    useRefreshOnWindowFocusPlugin,
   ] as Plugin<TData, TParams>[]);
 };
 

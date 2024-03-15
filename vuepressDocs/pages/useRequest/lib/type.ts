@@ -39,8 +39,8 @@ export interface Options<TData, TParams extends any[]> {
   pollingErrorRetryCount?: number;
 
   // refresh on window focus
-  refreshOnWindowFocus?: boolean;
-  focusTimespan?: number;
+  refreshOnWindowFocus?: Ref<boolean> | boolean;
+  focusTimespan?: Ref<number> | number;
 
   // debounce
   debounceWait?: number;
