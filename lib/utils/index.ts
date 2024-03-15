@@ -7,19 +7,23 @@ const isBrowser = !!(
 );
 type DomTarget = HTMLElement | Window | Document | Element;
 type OptionsTarget = DomTarget | (() => DomTarget) | Ref<DomTarget>;
-const getTargetElement = (target: OptionsTarget) => {
-  //   return isBrowser ? window : undefined;
+const refToRaw = (v: any) => {
+  return isRef(v) ? v.value : v;
+};
+
+const getTargetElement = (
+  target: OptionsTarget,
+  defaultTarget?: DomTarget | undefined | null
+) => {
   if (!isBrowser) {
     return undefined;
   }
-  let targetElement = target;
+  const defaultElement = defaultTarget === undefined ? window : defaultTarget;
+  let targetElement = refToRaw(target);
   if (typeof targetElement === "function") {
-    targetElement = targetElement();
-  }
-  if (isRef(targetElement)) {
-    targetElement = targetElement.value;
+    targetElement = refToRaw(targetElement());
   }
 
-  return targetElement || window;
+  return targetElement || defaultElement;
 };
 export { isBrowser, getTargetElement };

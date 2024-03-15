@@ -10,8 +10,8 @@ interface Options {
   passive?: boolean;
 }
 interface Result {
-  add: () => void;
-  remove: () => void;
+  restart: () => void;
+  stop: () => void;
 }
 const main: <
   K extends
@@ -65,8 +65,8 @@ const main: <
     });
   }
   return {
-    remove: () => removeEventListener(() => (disabledListener = true)),
-    add: () => addEventListener(() => (disabledListener = false)),
+    stop: () => removeEventListener(() => (disabledListener = true)),
+    restart: () => addEventListener(() => (disabledListener = false)),
   };
 };
 export default main;
