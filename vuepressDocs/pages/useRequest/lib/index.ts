@@ -5,6 +5,7 @@ import useDebouncePlugin from "./plugins/useDebouncePlugin";
 import useAutoRunPlugin from "./plugins/useAutoRunPlugin";
 import usePollingPlugin from "./plugins/usePollingPlugin";
 import useRefreshOnWindowFocusPlugin from "./plugins/useRefreshOnWindowFocusPlugin";
+import useErrorRetry from "./plugins/useErrorRetry";
 
 const useRequest = <TData, TParams extends any[]>(
   service: Service<TData, TParams>,
@@ -18,6 +19,7 @@ const useRequest = <TData, TParams extends any[]>(
     useAutoRunPlugin,
     usePollingPlugin,
     useRefreshOnWindowFocusPlugin,
+    useErrorRetry,
   ] as Plugin<TData, TParams>[]);
 };
 

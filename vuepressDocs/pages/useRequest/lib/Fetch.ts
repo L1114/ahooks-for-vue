@@ -59,11 +59,12 @@ export default class Fetch<TData, TParams extends any[]> {
       this.userOptionsHook("onBefore", params);
       this.state.loading = true;
       this.lastFetchTime = Date.now();
+
+      this.pluginsLifecycleHook("onRequest", params);
       const res = await this.serviceRef(...params);
       if (currentCount !== this.count) {
         return new Promise(() => {});
       }
-      this.pluginsLifecycleHook("onBefore", params);
       this.state.data = res;
       this.state.error = undefined;
       this.state.loading = false;
