@@ -1,1 +1,0 @@
-import{m as s}from"./index-uPMOWuNs.js";import{_ as t,g as r,o as a,c as m,t as n}from"./app-sV-t5tpv.js";import"./commonjsHelpers-1J56E-h6.js";const _={__name:"demo2",setup(c){const e=r("");return s("keydown",o=>{e.value=o.key}),(o,p)=>(a(),m("div",null,"Your press key is :"+n(e.value),1))}},f=t(_,[["__file","demo2.vue"]]);export{f as default};
