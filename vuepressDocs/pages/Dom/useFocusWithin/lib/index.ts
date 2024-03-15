@@ -9,7 +9,12 @@ interface Options {
   onBlur?: (e: FocusEvent | Event) => void;
   onChange?: (isFocusWithin: boolean) => void;
 }
-type UseFocusWithin = (p: OptionsTarget, options?: Options) => void;
+interface Result {
+  restart: () => void;
+  stop: () => void;
+  isFocusWithin: Ref<boolean>;
+}
+type UseFocusWithin = (p: OptionsTarget, options?: Options) => Result;
 const main: UseFocusWithin = (t, options = {}) => {
   const isFocusWithin = ref(false);
   let target = getTargetElement(t, null);
