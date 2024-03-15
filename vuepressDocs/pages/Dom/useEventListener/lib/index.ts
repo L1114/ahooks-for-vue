@@ -2,7 +2,11 @@ import { onUnmounted, Ref, watch, isRef } from "vue-demi";
 import { getTargetElement } from "../../../utils/index";
 
 type DomTarget = HTMLElement | Window | Document | Element;
-type OptionsTarget = DomTarget | (() => DomTarget) | Ref<DomTarget>;
+type OptionsTarget =
+  | DomTarget
+  | Ref<DomTarget>
+  | (() => DomTarget | Ref<DomTarget>);
+
 interface Options {
   target?: OptionsTarget;
   capture?: boolean;

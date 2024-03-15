@@ -3,7 +3,10 @@ import { getTargetElement } from "../../../utils/index";
 import useEventListener from "../../useEventListener/lib/index";
 
 type DomTarget = HTMLElement | Window | Document | Element;
-type OptionsTarget = DomTarget | (() => DomTarget) | Ref<DomTarget>;
+type OptionsTarget =
+  | DomTarget
+  | Ref<DomTarget>
+  | (() => DomTarget | Ref<DomTarget>);
 interface Options {
   onFocus?: (e: FocusEvent | Event) => void;
   onBlur?: (e: FocusEvent | Event) => void;

@@ -25,6 +25,6 @@
     "declaration": true,
     "declarationDir": "./types"
   },
-  "include": ["vuepressDocs/pages"]
+  "include": ["vuepressDocs/pages/**/*.ts"]
   // "exclude": ["**.spec.ts"]
 }
