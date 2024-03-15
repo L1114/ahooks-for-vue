@@ -1,4 +1,4 @@
-import { onUnmounted, Ref, watch, ref } from "vue-demi";
+import { Ref, watch, ref } from "vue-demi";
 import { getTargetElement } from "../utils/index";
 import useEventListener from "../useEventListener/index";
 
