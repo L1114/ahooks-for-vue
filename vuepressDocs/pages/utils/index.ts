@@ -1,4 +1,4 @@
-import { Ref, isRef } from "vue-demi";
+import { Ref, isRef, isProxy, toRaw } from "vue-demi";
 
 const isBrowser = !!(
   typeof window !== "undefined" &&
@@ -12,8 +12,14 @@ type OptionsTarget =
   | Ref<DomTarget>
   | (() => DomTarget | Ref<DomTarget>);
 
-const refToRaw = (v: any) => {
-  return isRef(v) ? v.value : v;
+const toRawData = (v: any) => {
+  if (isRef(v)) {
+    return v.value;
+  }
+  if (isProxy(v)) {
+    return toRaw(v);
+  }
+  return v;
 };
 
 const getTargetElement: (
@@ -24,11 +30,11 @@ const getTargetElement: (
     return null;
   }
   const defaultElement = defaultTarget === undefined ? window : defaultTarget;
-  let targetElement = refToRaw(target);
+  let targetElement = toRawData(target);
   if (typeof targetElement === "function") {
-    targetElement = refToRaw(targetElement());
+    targetElement = toRawData(targetElement());
   }
 
   return targetElement || defaultElement;
 };
-export { isBrowser, getTargetElement, refToRaw };
+export { isBrowser, getTargetElement, toRawData };

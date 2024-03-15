@@ -2,7 +2,7 @@ import { Plugin } from "../type";
 // import type Fetch from "./Fetch";
 import useDocumentVisibility from "../../../Dom/useDocumentVisibility/lib/index";
 import useFocusWithin from "../../../Dom/useFocusWithin/lib/index";
-import { refToRaw } from "../../../utils/index";
+import { toRawData } from "../../../utils/index";
 
 import { watch, isRef } from "vue-demi";
 
@@ -12,7 +12,7 @@ const useRefreshOnWindowFocusPlugin: Plugin<any, any[]> = (
 ) => {
   const runFetch = () => {
     // console.log("runFetch: ");
-    if (Date.now() - fetchInstance.lastFetchTime > refToRaw(focusTimespan)) {
+    if (Date.now() - fetchInstance.lastFetchTime > toRawData(focusTimespan)) {
       fetchInstance.refresh();
     }
   };
@@ -39,7 +39,7 @@ const useRefreshOnWindowFocusPlugin: Plugin<any, any[]> = (
     }).stop;
   };
 
-  if (refToRaw(refreshOnWindowFocus)) {
+  if (toRawData(refreshOnWindowFocus)) {
     startAll();
   }
   watch(
