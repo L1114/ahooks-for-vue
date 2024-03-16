@@ -11,7 +11,7 @@ export default class Fetch<TData, TParams extends any[]> {
   });
   pluginImpls: PluginReturn<TData, TParams>[] = [];
   lastFetchTime: number = 0;
-
+  loadingDelayTimer: ReturnType<typeof setTimeout> | undefined = undefined;
   constructor(
     public serviceRef: Service<TData, TParams>,
     public options: Options<TData, TParams>,
@@ -22,6 +22,18 @@ export default class Fetch<TData, TParams extends any[]> {
     let params = options.defaultParams || [];
     // @ts-ignore
     this.state.params = Array.isArray(params) ? params : [params];
+  }
+
+  setLoading(v: boolean) {
+    const loadingDelay = Number(this.options.loadingDelay) || 0;
+    if (v) {
+      this.loadingDelayTimer = setTimeout(() => {
+        this.state.loading = true;
+      }, loadingDelay);
+    } else {
+      clearTimeout(this.loadingDelayTimer);
+      this.state.loading = false;
+    }
   }
   getRawParams() {
     return toRaw(this.state.params) || [];
@@ -57,7 +69,7 @@ export default class Fetch<TData, TParams extends any[]> {
     try {
       this.state.params = params;
       this.userOptionsHook("onBefore", params);
-      this.state.loading = true;
+      this.setLoading(true);
       this.lastFetchTime = Date.now();
 
       this.pluginsLifecycleHook("onRequest", params);
@@ -67,8 +79,7 @@ export default class Fetch<TData, TParams extends any[]> {
       }
       this.state.data = res;
       this.state.error = undefined;
-      this.state.loading = false;
-
+      this.setLoading(false);
       this.userOptionsHook("onSuccess", params, res);
       this.userOptionsHook("onFinally", params, res);
       this.pluginsLifecycleHook("onSuccess", params, res);
@@ -79,7 +90,7 @@ export default class Fetch<TData, TParams extends any[]> {
       if (currentCount !== this.count) {
         return new Promise(() => {});
       }
-      this.state.loading = false;
+      this.setLoading(false);
       this.state.error = error;
 
       this.userOptionsHook("onError", params, undefined, error);
@@ -93,7 +104,7 @@ export default class Fetch<TData, TParams extends any[]> {
 
   cancel() {
     this.count++;
-    this.state.loading = false;
+    this.setLoading(false);
     // this.state.error = undefined;
     this.pluginsLifecycleHook("onCancel");
   }

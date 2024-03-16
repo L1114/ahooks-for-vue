@@ -21,9 +21,8 @@ const usePollingPlugin: Plugin<any, any[]> = (
     useDocumentVisibility((v) => {
       if (v === "visible" && !disabledPolling) {
         return startPolling(fetchInstance.getRawParams());
-      }
-      if (v === "hidden") {
-        return stopPolling();
+      } else {
+        stopPolling();
       }
     });
   }
