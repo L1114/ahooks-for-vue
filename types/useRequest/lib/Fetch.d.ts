@@ -7,7 +7,10 @@ export default class Fetch<TData, TParams extends any[]> {
     count: number;
     state: FetchState<TData, TParams>;
     pluginImpls: PluginReturn<TData, TParams>[];
+    lastFetchTime: number;
+    loadingDelayTimer: ReturnType<typeof setTimeout> | undefined;
     constructor(serviceRef: Service<TData, TParams>, options: Options<TData, TParams>, subscribe: Subscribe, initState: any[]);
+    setLoading(v: boolean): void;
     getRawParams(): TParams | never[];
     userOptionsHook(hookName: keyof typeof this.options, ...rest: any): void;
     pluginsLifecycleHook(hookName: keyof PluginReturn<TData, TParams>, ...rest: any[]): any;
