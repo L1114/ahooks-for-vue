@@ -27,8 +27,8 @@ const usePollingPlugin: Plugin<any, any[]> = (
     });
   }
 
-  fetchInstance.run = (..._params) => {
-    const params = _params?.length ? _params : fetchInstance.getRawParams();
+  fetchInstance.run = (...params) => {
+    // const params = _params?.length ? _params : fetchInstance.getRawParams();
     originRun(...params);
     startPolling(params);
   };

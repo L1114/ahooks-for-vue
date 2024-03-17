@@ -1,13 +1,15 @@
 import { Plugin } from "../type";
 
-import { onMounted, onUnmounted, watch, Ref, isRef, ref } from "vue-demi";
+import { onMounted, onUnmounted, watch, Ref, ref } from "vue-demi";
+import { toRawData } from "../../../utils/index";
+
 const useAutoRunPlugin: Plugin<any, any[]> = (
   fetchInstance,
   { manual, ready = ref(true) }
 ) => {
   let stopNow = false;
   onMounted(() => {
-    const _ready = isRef(ready) ? ready.value : !!ready;
+    const _ready = toRawData(ready);
     stopNow = !_ready;
     if (!manual && _ready) {
       fetchInstance.run(...fetchInstance.getRawParams());
@@ -18,7 +20,7 @@ const useAutoRunPlugin: Plugin<any, any[]> = (
     stopWatch();
   });
   const stopWatch = watch(ready as Ref<boolean>, (newV) => {
-    stopNow = !newV;
+    stopNow = !toRawData(ready);
     // console.log("stopNow: ", stopNow);
     // console.log("manual :>> ", manual);
     // console.log("fetchInstance :>> ", fetchInstance);

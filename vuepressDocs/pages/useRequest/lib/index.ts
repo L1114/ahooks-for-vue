@@ -16,10 +16,10 @@ const useRequest = <TData, TParams extends any[]>(
     ...(plugins || []),
     useThrottlePlugin,
     useDebouncePlugin,
-    useAutoRunPlugin,
     usePollingPlugin,
     useRefreshOnWindowFocusPlugin,
     useErrorRetry,
+    useAutoRunPlugin,
   ] as Plugin<TData, TParams>[]);
 };
 
