@@ -25,8 +25,13 @@ const { documentVisibility } = useDocumentVisibility();
 
 ### Params
 
-| 参数      | 说明             | 类型                            |
-| --------- | ---------------- | ------------------------------- |
-| callBack  | 回调函数         | ( documentVisibility ) => void) |
-| `restart` | 重新开始监听函数 | `() => void`                    |
-| `stop`    | 移除监听函数     | `() => void`                    |
+| 参数     | 说明     | 类型                            |
+| -------- | -------- | ------------------------------- |
+| callBack | 回调函数 | ( documentVisibility ) => void) |
+
+### `Result 相比ahooks新增的APi`
+
+| 参数      | 说明             | 类型         |
+| --------- | ---------------- | ------------ |
+| `restart` | 重新开始监听函数 | `() => void` |
+| `stop`    | 移除监听函数     | `() => void` |
