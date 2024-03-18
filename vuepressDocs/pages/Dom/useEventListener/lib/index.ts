@@ -1,4 +1,4 @@
-import { Ref, watch, isRef } from "vue-demi";
+import { Ref, watch, isRef, onUnmounted } from "vue-demi";
 import { getTargetElement } from "../../../utils/index";
 
 type DomTarget = HTMLElement | Window | Document | Element;
@@ -57,9 +57,9 @@ const main: <
     });
   };
   addEventListener();
-  // onUnmounted(() => {
-  //   removeEventListener();
-  // });
+  onUnmounted(() => {
+    removeEventListener();
+  });
 
   if (isRef(options?.target)) {
     watch(options?.target, (v) => {

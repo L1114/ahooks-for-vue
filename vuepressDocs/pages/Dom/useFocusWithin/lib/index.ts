@@ -65,7 +65,7 @@ const main: UseFocusWithin = (t, options = {}) => {
         if (isFocusWithin.value) {
           isFocusWithin.value = false;
           options?.onBlur?.(v);
-          options?.onChange?.(true);
+          options?.onChange?.(false);
         }
       },
       {
