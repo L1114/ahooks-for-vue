@@ -33,9 +33,9 @@ export interface Options<TData, TParams extends any[]> {
   loadingDelay?: number;
 
   // polling
-  pollingInterval?: number;
-  pollingWhenHidden?: boolean;
-  pollingErrorRetryCount?: number;
+  pollingInterval?: Ref<number> | number;
+  pollingWhenHidden?: Ref<boolean> | boolean;
+  pollingErrorRetryCount?: Ref<number> | number;
 
   // refresh on window focus
   refreshOnWindowFocus?: Ref<boolean> | boolean;
@@ -60,8 +60,8 @@ export interface Options<TData, TParams extends any[]> {
   //   getCache?: (params: TParams) => CachedData<TData, TParams> | undefined;
 
   // retry
-  retryCount?: number;
-  retryInterval?: number;
+  retryCount?: Ref<number> | number;
+  retryInterval?: Ref<number> | number;
 
   // ready
   ready?: Ref<boolean>;

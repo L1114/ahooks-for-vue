@@ -1,14 +1,28 @@
 import { Plugin } from "../type";
 import useDocumentVisibility from "../../../Dom/useDocumentVisibility/lib/index";
-import { onUnmounted } from "vue-demi";
+import { onUnmounted, computed } from "vue-demi";
+import { toRawData } from "../../../utils/index";
 
 const usePollingPlugin: Plugin<any, any[]> = (
   fetchInstance,
-  { pollingInterval, pollingWhenHidden = true, pollingErrorRetryCount = -1 }
-) => {
-  if (!pollingInterval || pollingInterval <= 0) {
-    return {};
+  {
+    pollingInterval: _pollingInterval,
+    pollingWhenHidden: _pollingWhenHidden = true,
+    pollingErrorRetryCount: _pollingErrorRetryCount = -1,
   }
+) => {
+  const pollingInterval = computed(() => {
+    return toRawData(_pollingInterval);
+  });
+  const pollingErrorRetryCount = computed(() => {
+    return toRawData(_pollingErrorRetryCount);
+  });
+  const pollingWhenHidden = computed(() => {
+    return toRawData(_pollingWhenHidden);
+  });
+
+  // setInterval(() => {}, 1000);
+
   let disabledPolling = false;
   let errorCount = 0;
   let timer: ReturnType<typeof setTimeout>;
@@ -17,15 +31,15 @@ const usePollingPlugin: Plugin<any, any[]> = (
     clearTimeout(timer);
   };
   const originRun = fetchInstance.run.bind(fetchInstance);
-  if (!pollingWhenHidden) {
-    useDocumentVisibility((v) => {
-      if (v === "visible" && !disabledPolling) {
-        return startPolling(fetchInstance.getRawParams());
-      } else {
-        stopPolling();
-      }
-    });
-  }
+
+  useDocumentVisibility((v) => {
+    if (pollingWhenHidden.value) return;
+    if (v === "visible" && !disabledPolling) {
+      return startPolling(fetchInstance.getRawParams());
+    } else {
+      stopPolling();
+    }
+  });
 
   fetchInstance.run = (...params) => {
     // const params = _params?.length ? _params : fetchInstance.getRawParams();
@@ -36,10 +50,14 @@ const usePollingPlugin: Plugin<any, any[]> = (
   const startPolling = (params: any[]) => {
     stopPolling();
     disabledPolling = false;
+
+    if (!Number(pollingInterval.value) || Number(pollingInterval.value) <= 0) {
+      return {};
+    }
     timer = setTimeout(() => {
       fetchInstance.run(...(params || []));
       // fetchInstance.refresh()
-    }, pollingInterval);
+    }, pollingInterval.value);
   };
   onUnmounted(() => stopPolling(true));
   return {
@@ -47,9 +65,9 @@ const usePollingPlugin: Plugin<any, any[]> = (
     onError: () => {
       errorCount++;
       if (
-        pollingErrorRetryCount !== undefined &&
-        pollingErrorRetryCount !== -1 &&
-        errorCount >= pollingErrorRetryCount
+        pollingErrorRetryCount.value !== undefined &&
+        pollingErrorRetryCount.value !== -1 &&
+        errorCount >= pollingErrorRetryCount.value
       ) {
         stopPolling(true);
       }
