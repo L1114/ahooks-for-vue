@@ -10,8 +10,8 @@
 - 节流
 - 屏幕聚焦重新请求
 - 错误重试
-- ~~loading delay~~
-- ~~缓存~~
+- loading delay
+- 缓存
 
 接下来让我们先从两个最简单的例子认识 `useRequest`。
 

@@ -1,6 +1,6 @@
 ## Vue Hooks 库
 
-- 参考蚂蚁金服开源的 react hook 库 [ahooks](https://ahooks.js.org/) 实现的 vue 版本(实现部分常用的 hook,并保持几乎一致的文档和 api),作为 vue 官方 hook 库 vueUse 的补充.
+- 参考蚂蚁金服开源的 react hook 库 [ahooks](https://ahooks.js.org/) 实现的 vue 版本,选择实现部分常用的 hook,并保持几乎一致的文档和 api(新增部分优化 api),作为 vue 官方 hook 库 vueUse 的补充.
 
 ## 📚 文档
 
