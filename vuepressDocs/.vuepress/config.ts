@@ -84,6 +84,7 @@ export default defineUserConfig({
           "/pages/useRequest/polling",
           "/pages/useRequest/retry",
           "/pages/useRequest/useRefreshOnWindowFocus",
+          "/pages/useRequest/cache",
         ],
       },
       ...sidebar,

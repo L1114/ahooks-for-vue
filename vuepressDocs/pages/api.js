@@ -1,3 +1,5 @@
+import Mock from "mockjs";
+
 export const mockFetch = async (...params) => {
   console.log("mockFetch params: ", params);
   return new Promise((resolve, reject) => {
@@ -22,5 +24,16 @@ export const mockFetchError = async (...params) => {
     setTimeout(() => {
       reject(Math.random());
     }, 200);
+  });
+};
+export const mockFetchData = async (...params) => {
+  console.log("mockFetch params: ", params);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        data: Mock.mock("@paragraph"),
+        time: Date.now(),
+      });
+    }, 1000);
   });
 };

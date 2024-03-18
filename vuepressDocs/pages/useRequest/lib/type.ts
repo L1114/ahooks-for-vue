@@ -56,8 +56,8 @@ export interface Options<TData, TParams extends any[]> {
   cacheKey?: string;
   cacheTime?: number;
   staleTime?: number;
-  //   setCache?: (data: CachedData<TData, TParams>) => void;
-  //   getCache?: (params: TParams) => CachedData<TData, TParams> | undefined;
+  setCache?: (data: TData) => void;
+  getCache?: () => TData | undefined;
 
   // retry
   retryCount?: Ref<number> | number;
@@ -73,6 +73,7 @@ export interface PluginReturn<TData, TParams extends any[]> {
     | ({
         stopNow?: boolean;
         returnNow?: boolean;
+        returnData?: any;
       } & Partial<FetchState<TData, TParams>>)
     | void;
 

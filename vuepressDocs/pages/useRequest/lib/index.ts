@@ -6,6 +6,7 @@ import useAutoRunPlugin from "./plugins/useAutoRunPlugin";
 import usePollingPlugin from "./plugins/usePollingPlugin";
 import useRefreshOnWindowFocusPlugin from "./plugins/useRefreshOnWindowFocusPlugin";
 import useErrorRetry from "./plugins/useErrorRetry";
+import { useCachePlugin } from "./plugins/useCachePlugin";
 
 const useRequest = <TData, TParams extends any[]>(
   service: Service<TData, TParams>,
@@ -14,6 +15,7 @@ const useRequest = <TData, TParams extends any[]>(
 ) => {
   return useRequestImplement<TData, TParams>(service, options, [
     ...(plugins || []),
+    useCachePlugin,
     useThrottlePlugin,
     useDebouncePlugin,
     usePollingPlugin,

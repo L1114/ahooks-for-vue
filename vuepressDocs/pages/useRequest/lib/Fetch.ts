@@ -72,9 +72,17 @@ export default class Fetch<TData, TParams extends any[]> {
   async runAsync(...params: TParams): Promise<TData> {
     this.count++;
     const currentCount = this.count;
-    const { stopNow = false } = this.pluginsLifecycleHook("onBefore", params);
+    const {
+      stopNow = false,
+      returnNow,
+      data,
+    } = this.pluginsLifecycleHook("onBefore", params);
     if (stopNow) {
       return new Promise(() => {});
+    }
+
+    if (returnNow) {
+      return Promise.resolve(data);
     }
     try {
       this.state.params = params;
@@ -84,6 +92,7 @@ export default class Fetch<TData, TParams extends any[]> {
 
       this.pluginsLifecycleHook("onRequest", params);
       const res = await this.serviceRef(...params);
+
       if (currentCount !== this.count) {
         return new Promise(() => {});
       }
@@ -91,10 +100,10 @@ export default class Fetch<TData, TParams extends any[]> {
       this.state.data = this.formatResult(res);
       this.state.error = undefined;
       this.setLoading(false);
-      this.userOptionsHook("onSuccess", params, res);
-      this.userOptionsHook("onFinally", params, res);
-      this.pluginsLifecycleHook("onSuccess", params, res);
-      this.pluginsLifecycleHook("onFinally", params, res);
+      this.userOptionsHook("onSuccess", res, params);
+      this.userOptionsHook("onFinally", res, params);
+      this.pluginsLifecycleHook("onSuccess", res, params);
+      this.pluginsLifecycleHook("onFinally", res, params);
 
       return res;
     } catch (error: any) {
