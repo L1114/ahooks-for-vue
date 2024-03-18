@@ -38,6 +38,16 @@ export default class Fetch<TData, TParams extends any[]> {
   getRawParams() {
     return toRaw(this.state.params) || [];
   }
+  formatResult(res: any) {
+    let data = res;
+    try {
+      data = this.options.formatResult ? this.options.formatResult(res) : res;
+    } catch (error) {
+      console.log("error :>> ", error);
+    }
+    return data;
+  }
+
   userOptionsHook(hookName: keyof typeof this.options, ...rest: any) {
     const hook = (this.options && this.options[hookName]) as Function;
     hook && hook(...rest);
@@ -77,7 +87,8 @@ export default class Fetch<TData, TParams extends any[]> {
       if (currentCount !== this.count) {
         return new Promise(() => {});
       }
-      this.state.data = res;
+
+      this.state.data = this.formatResult(res);
       this.state.error = undefined;
       this.setLoading(false);
       this.userOptionsHook("onSuccess", params, res);

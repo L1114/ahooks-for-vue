@@ -21,11 +21,10 @@ export interface Options<TData, TParams extends any[]> {
   onBefore?: (params: TParams) => void;
   onSuccess?: (data: TData, params: TParams) => void;
   onError?: (e: Error, params: TParams) => void;
-  // formatResult?: (res: any) => TData;
+  formatResult?: (res: any) => TData;
   onFinally?: (params: TParams, data?: TData, e?: Error) => void;
 
   defaultParams?: TParams;
-
   // refreshDeps
   //   refreshDeps?: DependencyList;
   refreshDepsAction?: () => void;
