@@ -27,6 +27,7 @@ export default class Fetch<TData, TParams extends any[]> {
   setLoading(v: boolean) {
     const loadingDelay = Number(this.options.loadingDelay) || 0;
     if (v) {
+      clearTimeout(this.loadingDelayTimer);
       this.loadingDelayTimer = setTimeout(() => {
         this.state.loading = true;
       }, loadingDelay);

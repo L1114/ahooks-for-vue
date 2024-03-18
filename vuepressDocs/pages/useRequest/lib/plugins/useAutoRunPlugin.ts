@@ -12,7 +12,7 @@ const useAutoRunPlugin: Plugin<any, any[]> = (
     const _ready = toRawData(ready);
     stopNow = !_ready;
     if (!manual && _ready) {
-      fetchInstance.run(...fetchInstance.getRawParams());
+      fetchInstance.refresh();
     }
   });
   onUnmounted(() => {

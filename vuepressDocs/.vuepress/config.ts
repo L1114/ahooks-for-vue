@@ -80,6 +80,7 @@ export default defineUserConfig({
           "/pages/useRequest/basic",
           "/pages/useRequest/throttle",
           "/pages/useRequest/debounce",
+          "/pages/useRequest/loadingDelay",
           "/pages/useRequest/ready",
           "/pages/useRequest/polling",
           "/pages/useRequest/retry",
