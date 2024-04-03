@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-bdc2ffb6","path":"/pages/useRequest/quick/","title":"快速上手","lang":"zh-CN","frontmatter":{},"headers":[],"git":{"updatedTime":1710750582000,"contributors":[{"name":"郑磊","email":"zlei0885@163.com","commits":3}]},"filePathRelative":"pages/useRequest/quick/readme.md"}');export{e as data};

@@ -12,6 +12,7 @@ export default class Fetch<TData, TParams extends any[]> {
     constructor(serviceRef: Service<TData, TParams>, options: Options<TData, TParams>, subscribe: Subscribe, initState: any[]);
     setLoading(v: boolean): void;
     getRawParams(): TParams | never[];
+    formatResult(res: any): any;
     userOptionsHook(hookName: keyof typeof this.options, ...rest: any): void;
     pluginsLifecycleHook(hookName: keyof PluginReturn<TData, TParams>, ...rest: any[]): any;
     run(...params: TParams): void;

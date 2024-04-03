@@ -12,13 +12,14 @@ export interface Options<TData, TParams extends any[]> {
     onBefore?: (params: TParams) => void;
     onSuccess?: (data: TData, params: TParams) => void;
     onError?: (e: Error, params: TParams) => void;
+    formatResult?: (res: any) => TData;
     onFinally?: (params: TParams, data?: TData, e?: Error) => void;
     defaultParams?: TParams;
     refreshDepsAction?: () => void;
     loadingDelay?: number;
-    pollingInterval?: number;
-    pollingWhenHidden?: boolean;
-    pollingErrorRetryCount?: number;
+    pollingInterval?: Ref<number> | number;
+    pollingWhenHidden?: Ref<boolean> | boolean;
+    pollingErrorRetryCount?: Ref<number> | number;
     refreshOnWindowFocus?: Ref<boolean> | boolean;
     focusTimespan?: Ref<number> | number;
     debounceWait?: number;
@@ -31,8 +32,10 @@ export interface Options<TData, TParams extends any[]> {
     cacheKey?: string;
     cacheTime?: number;
     staleTime?: number;
-    retryCount?: number;
-    retryInterval?: number;
+    setCache?: (data: TData) => void;
+    getCache?: () => TData | undefined;
+    retryCount?: Ref<number> | number;
+    retryInterval?: Ref<number> | number;
     ready?: Ref<boolean>;
 }
 export type Subscribe = () => void;
@@ -40,6 +43,7 @@ export interface PluginReturn<TData, TParams extends any[]> {
     onBefore?: (params: TParams) => ({
         stopNow?: boolean;
         returnNow?: boolean;
+        returnData?: any;
     } & Partial<FetchState<TData, TParams>>) | void;
     onRequest?: (service: Service<TData, TParams>, params: TParams) => {
         servicePromise?: Promise<TData>;

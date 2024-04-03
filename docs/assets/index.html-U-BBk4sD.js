@@ -1,1 +1,0 @@
-import{_ as o,r as t,o as n,c as a,a as c,b as m}from"./app-m2-sF_Mn.js";const r={};function s(_,d){const e=t("ReadmeCom");return n(),a("div",null,[c(e),m(' <Content path="../README.md" /> ')])}const f=o(r,[["render",s],["__file","index.html.vue"]]);export{f as default};
