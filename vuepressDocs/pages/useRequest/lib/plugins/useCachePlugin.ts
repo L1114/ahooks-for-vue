@@ -1,7 +1,7 @@
 import { Plugin } from "../type";
 
-import { onMounted, onUnmounted, watch, Ref, ref } from "vue-demi";
-import { toRawData } from "../../../utils/index";
+// import { onMounted, onUnmounted, watch, Ref, ref } from "vue-demi";
+// import { toRawData } from "../../../utils/index";
 
 interface cacheItem {
   // cacheKey: string;
