@@ -4,6 +4,7 @@ import path from "path";
 import copy from "rollup-plugin-copy";
 import legacy from "@vitejs/plugin-legacy";
 import resolve from "@rollup/plugin-node-resolve";
+import { visualizer } from "rollup-plugin-visualizer";
 // import babel from "@rollup/plugin-babel";
 // import babel from 'vite-plugin-babel';
 
@@ -17,6 +18,12 @@ export default defineConfig({
     //   // ],
     //   // renderLegacyChunks: false,
     // }),
+    visualizer({
+      // filename: "./node_modules/.cache/visualizer/stats.html",
+      open: true,
+      gzipSize: true,
+      brotliSize: true,
+    }),
   ],
   optimizeDeps: {
     // include: [],
@@ -24,10 +31,11 @@ export default defineConfig({
   },
   build: {
     // target: "es2015",
-    minify: true,
+    // minify: true,
     lib: {
       entry: path.resolve("./vuepressDocs/pages/main.ts"),
       name: "ahooks-for-vue",
+      formats: ["cjs", "es"],
     },
     outDir: "packages",
     rollupOptions: {
